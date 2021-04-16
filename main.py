@@ -23,8 +23,9 @@ def send_welcome_message(update: Update, context: CallbackContext) -> int:
         [topic] for topic in TOPICS],
     )
 
-    update.message.reply_text(
-        text="Hallihallo {user}. Ich bin der Silberfisch vom Wintower!".format(user=user_name(update.message.from_user)),
+    update.message.reply_animation(
+        animation="CgACAgQAAxkBAANkYHntZf7AClZzlRQzg8GSvzQcc7YAAmgJAALbAclTnENXyJvfCgIfBA",
+        caption="Hallihallo {user}. Ich bin der Silberfisch vom Wintower!".format(user=user_name(update.message.from_user)),
         reply_markup=reply_markup,
     )
 

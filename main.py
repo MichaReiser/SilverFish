@@ -71,9 +71,7 @@ def handle_topic_selection(update: Update, context: CallbackContext) -> int:
     next_option = option.handle_response(update, context, OPTIONS)
 
     if not next_option:
-        update.message.reply_animation(
-            animation=HUH_FILE_ID,
-        )
+        # No new option, stay in current option
         return HANDLE_RESPONSE
 
     enter_option(next_option, update, context)

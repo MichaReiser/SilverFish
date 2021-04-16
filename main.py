@@ -2,7 +2,7 @@
 
 from telegram import Update, User, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater, ConversationHandler
-from options import OPTIONS
+from options import get_option, OPTIONS
 from option import Option
 from constants import HUH_FILE_ID, OHOH_FILE_ID
 
@@ -26,12 +26,12 @@ def send_welcome_message(update: Update, context: CallbackContext) -> int:
         caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung.".format(user=user_name(update.message.from_user)),
     )
 
-    return enter_option(OPTIONS.options[0], update, context)
+    return enter_option(OPTIONS[0], update, context)
 
 def enter_option(option: Option, update: Update, context: CallbackContext) -> int:
     context.user_data['option'] = option.uri
 
-    option.reply(update, context, OPTIONS)
+    option.reply(update, context, get_option)
 
     return HANDLE_RESPONSE
 
@@ -46,8 +46,8 @@ def reply_with_buttoned_question(update: Update, context: CallbackContext, quest
 def handle_topic_selection(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("typing")
 
-    option = OPTIONS.get_option(context.user_data['option'])
-    next_option = option.handle_response(update, context, OPTIONS)
+    option = get_option(context.user_data['option'])
+    next_option = option.handle_response(update, context, get_option)
 
     if not next_option:
         # No new option, stay in current option

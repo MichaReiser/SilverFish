@@ -1,6 +1,7 @@
-from option import Option, ChoiceOption, Options
+from typing import Optional
+from option import Option, ChoiceOption
 
-OPTIONS = Options([
+OPTIONS = [
     ChoiceOption(
         uri="/", 
         label="DON't offer this as an option or you'll be fired", 
@@ -19,4 +20,9 @@ OPTIONS = Options([
         message="Kaffee oder Alkohol?",
         choices=["/"]
     )
-])
+]
+
+BY_URI = {option.uri: option for option in OPTIONS}
+
+def get_option(uri: str)  -> Optional[Option]:
+    return BY_URI[uri]

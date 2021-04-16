@@ -34,7 +34,7 @@ OPTIONS = [
     ),
     ChoiceOption(
         uri="/gesundheit", 
-        label="Ja, unbedint!", 
+        label="Ja, unbedingt!", 
         message="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
         choices=["/",]
     ),

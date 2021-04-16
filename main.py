@@ -2,7 +2,9 @@
 
 from telegram import Update, User, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater, ConversationHandler
-from option import Option, ChoiceOption, Options
+from options import OPTIONS
+from option import Option
+from constants import HUH_FILE_ID, OHOH_FILE_ID
 
 import os
 from dotenv import load_dotenv
@@ -14,29 +16,6 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger()
 
 TOKEN = os.getenv('ACCESS_TOKEN')
-HUH_FILE_ID = 'CgACAgQAAxkBAAMPYHno7oe6lq15sZRRudHW7aRfSeQAAisCAALMf5RSy6bOGPE0HKUfBA'
-OHOH_FILE_ID = 'CgACAgQAAxkBAAOBYHnyx4IlMA69PINFGa7Zjub1_HYAAj0CAAK-4sRSwWafFSpUMNMfBA'
-
-OPTIONS = Options([
-    ChoiceOption(
-        uri="/", 
-        label="DON't offer this as an option or you'll be fired", 
-        message="Was interessiert dich",
-        choices=["/sisi", "/drinkinghabits"]
-    ),
-    ChoiceOption(
-        uri="/sisi", 
-        label="Sisi", 
-        message="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
-        choices=["/",]
-    ),
-    ChoiceOption(
-        uri="/drinkinghabits",
-        label="Trinkgewohnheiten",
-        message="Kaffee oder Alkohol?",
-        choices=["/"]
-    )
-])
 
 HANDLE_RESPONSE = range(1)
 

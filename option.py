@@ -4,8 +4,7 @@ from typing import List, Optional
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
 
-HUH_FILE_ID = 'CgACAgQAAxkBAAMPYHno7oe6lq15sZRRudHW7aRfSeQAAisCAALMf5RSy6bOGPE0HKUfBA'
-OHOH_FILE_ID = 'CgACAgQAAxkBAAOBYHnyx4IlMA69PINFGa7Zjub1_HYAAj0CAAK-4sRSwWafFSpUMNMfBA'
+from constants import HUH_FILE_ID, OHOH_FILE_ID
 
 # Forward declaration?
 class Options:

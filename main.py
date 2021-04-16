@@ -13,9 +13,11 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger()
 
 TOKEN = os.getenv('ACCESS_TOKEN')
+HUH_FILE_ID = 'CgACAgQAAxkBAAMPYHno7oe6lq15sZRRudHW7aRfSeQAAisCAALMf5RSy6bOGPE0HKUfBA'
+OHOH_FILE_ID = 'CgACAgQAAxkBAAOBYHnyx4IlMA69PINFGa7Zjub1_HYAAj0CAAK-4sRSwWafFSpUMNMfBA'
 TOPICS = ['Sisi', 'Trinkgewohnheiten']
 
-CHOOSE_TOPIC = range(2)
+CHOOSE_TOPIC = range(1)
 
 def send_welcome_message(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action(action="typing")
@@ -39,11 +41,11 @@ def handle_topic_selection(update: Update, context: CallbackContext) -> int:
     if not topic in TOPICS:
         # Huh
         update.message.reply_animation(
-            animation="CgACAgQAAxkBAAMPYHno7oe6lq15sZRRudHW7aRfSeQAAisCAALMf5RSy6bOGPE0HKUfBA",
+            animation=HUH_FILE_ID,
         )
         return CHOOSE_TOPIC
 
-    update.message.reply_text(text="You selected the topic '{topic}'".format(topic=topic), reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text(text="Du interessierst dich für die Kaiserin Elisabeth. Was für Objekte findest du spannend? Schuhe oder Instrumente?", reply_markup=ReplyKeyboardRemove())
     context.user_data['topic'] = topic
 
     return ConversationHandler.END
@@ -51,7 +53,7 @@ def handle_topic_selection(update: Update, context: CallbackContext) -> int:
 def handle_unknown_message(update: Update, context: CallbackContext) -> int:
     # Huh
     update.message.reply_animation(
-        animation="CgACAgQAAxkBAAMPYHno7oe6lq15sZRRudHW7aRfSeQAAisCAALMf5RSy6bOGPE0HKUfBA",
+        animation=HUH_FILE_ID,
     )
 
     return ConversationHandler.END
@@ -60,7 +62,8 @@ def handle_error(update: Update, context: CallbackContext):
     logger.error('Handling the update "%s" caused an error "%s"', update, context.error, exc_info=context.error)
     if update and update.message:
         # Ohoh
-        update.message.reply_animation(animation="CgACAgQAAxkBAAMVYHm__nCB5m5X5Ki0dphIG6CQHuoAAjYCAAKXztRSxnPha9rxZUQfBA", caption="Ohoh....")
+        update.message.reply_animation(animation=OHOH_FILE_ID, caption="Ohoh....")
+        
                                                   
 def user_name(user: User) -> str:
     return user.first_name or user.last_name or user.username

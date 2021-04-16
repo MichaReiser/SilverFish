@@ -1,5 +1,6 @@
 # SilverFish
-GlamHack21
+[GlamHack21](https://hack.glam.opendata.ch/)
+
 
 Chatbot that guides you through the collection of historical objects
 

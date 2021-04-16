@@ -26,7 +26,7 @@ def send_welcome_message(update: Update, context: CallbackContext) -> int:
     )
     update.message.reply_animation(
         animation="CgACAgQAAxkBAANkYHntZf7AClZzlRQzg8GSvzQcc7YAAmgJAALbAclTnENXyJvfCgIfBA",
-        caption="Hallihallo {user}. Ich bin der Silberfisch vom Wintower!".format(user=user_name(update.message.from_user)),
+        caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung. Was interessiert dich?".format(user=user_name(update.message.from_user)),
         reply_markup=reply_markup,
     )
     return CHOOSE_TOPIC
@@ -51,7 +51,7 @@ def handle_topic_selection(update: Update, context: CallbackContext) -> int:
         )
         return CHOOSE_TOPIC
 
-    update.message.reply_text(text="Du interessierst dich für die Kaiserin Elisabeth. Was für Objekte findest du spannend? Schuhe oder Instrumente?", reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text(text="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?", reply_markup=ReplyKeyboardRemove())
     context.user_data['topic'] = topic
 
     return ConversationHandler.END
@@ -68,7 +68,7 @@ def handle_error(update: Update, context: CallbackContext):
     logger.error('Handling the update "%s" caused an error "%s"', update, context.error, exc_info=context.error)
     if update and update.message:
         # Ohoh
-        update.message.reply_animation(animation=OHOH_FILE_ID, caption="Ohoh....")
+        update.message.reply_animation(animation=OHOH_FILE_ID, caption="Ohoh... das habe ich jetzt nicht ganz verstanden. Entschuldige.")
         
                                                   
 def user_name(user: User) -> str:

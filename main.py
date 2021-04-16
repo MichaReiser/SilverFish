@@ -62,7 +62,7 @@ def handle_error(update: Update, context: CallbackContext):
     logger.error('Handling the update "%s" caused an error "%s"', update, context.error, exc_info=context.error)
     if update and update.message:
         # Ohoh
-        update.message.reply_animation(animation=OHOH_FILE_ID, caption="Ohoh....")
+        update.message.reply_animation(animation=OHOH_FILE_ID, caption="Ohoh... das habe ich jetzt nicht ganz verstanden. Entschuldige.")
         
                                                   
 def user_name(user: User) -> str:

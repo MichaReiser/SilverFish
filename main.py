@@ -16,15 +16,18 @@ logger = logging.getLogger()
 
 TOKEN = os.getenv('ACCESS_TOKEN')
 
-def start_test(update: Update, context: CallbackContext):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
+def start_test(update: Update, context: CallbackContext) -> int:
+    update.message.reply_chat_action(action="typing")
+    update.message.reply_text(text="I'm a bot, please talk to me!")
 
-def handle_text_message(update: Update, context: CallbackContext):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Your text: " + update.message.text)
+def handle_text_message(update: Update, context: CallbackContext) -> int:
+    update.message.reply_chat_action("typing")
+    update.message.reply_text(text="Your text: " + update.message.text)
 
 def handle_error(update: Update, context: CallbackContext):
     logger.warning('Handling the update "%s" caused an error "%s"', update, context.error)
-    context.bot.send_animation(chat_id=update.effective_chat.id, animation="CgACAgQAAxkBAAMVYHm__nCB5m5X5Ki0dphIG6CQHuoAAjYCAAKXztRSxnPha9rxZUQfBA")
+    if update and update.message:
+        update.message.send_animation(animation="CgACAgQAAxkBAAMVYHm__nCB5m5X5Ki0dphIG6CQHuoAAjYCAAKXztRSxnPha9rxZUQfBA")
 
 def main():
     updater = Updater(token=TOKEN, use_context=True)
@@ -34,6 +37,7 @@ def main():
     dispatcher.add_error_handler(handle_error)
 
     updater.start_polling()
+    updater.idle()
 
 if __name__ == '__main__':
     main()

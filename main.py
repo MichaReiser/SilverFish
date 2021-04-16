@@ -45,7 +45,7 @@ def handle_topic_selection(update: Update, context: CallbackContext) -> int:
         )
         return CHOOSE_TOPIC
 
-    update.message.reply_text(text="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre SChuhe oder über ihr Klavier erzählen?", reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text(text="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?", reply_markup=ReplyKeyboardRemove())
     context.user_data['topic'] = topic
 
     return ConversationHandler.END

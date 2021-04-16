@@ -28,10 +28,17 @@ OPTIONS = [
     ),
     ChoiceOption(
         uri="/sisi/schuhe", 
-        label="Klavier", 
-        message="Schau, das Paar Turnschuhe von der als Sisi bekannten Kaiserin Elisabeth von Österreich, ca. von 1865-1870.",
+        label="Schuhe", 
+        message="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuheca von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
+        choices=["/gesundheit",]
+    ),
+    ChoiceOption(
+        uri="/gesundheit", 
+        label="Ja, unbedint!", 
+        message="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
         choices=["/",]
     ),
+    
     
 ]
 

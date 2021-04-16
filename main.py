@@ -78,10 +78,11 @@ def main():
         entry_points=[CommandHandler('start', send_welcome_message)],
         states = {
             HANDLE_RESPONSE: [
-                MessageHandler(Filters.text, handle_topic_selection)
+	 	CommandHandler('start', send_welcome_message),
+		MessageHandler(Filters.text, handle_topic_selection),
             ]
         },
-        fallbacks=[MessageHandler(Filters.all, handle_unknown_message)]
+        fallbacks=[ MessageHandler(Filters.all, handle_unknown_message)]
     )
 
     updater = Updater(token=TOKEN, use_context=True)

@@ -48,7 +48,7 @@ OPTIONS = [
         uri="/sisi/franz", 
         label="Ja!", 
         message="WIKIPEDIA ARTIKEL Ich habe auch Objekte von Franz Josef I, dem Mann von Sisi. Soll ich sie dir zeigen?",
-        choices=["/"]
+        choices=["/sisi/ende"]
     ),
           
           

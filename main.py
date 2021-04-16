@@ -1,6 +1,6 @@
 #!/bin/python
 
-from telegram import Update, User, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram import Update, User, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater, ConversationHandler
 
 import os
@@ -24,14 +24,20 @@ def send_welcome_message(update: Update, context: CallbackContext) -> int:
     reply_markup = ReplyKeyboardMarkup([
         [topic] for topic in TOPICS],
     )
-
     update.message.reply_animation(
         animation="CgACAgQAAxkBAANkYHntZf7AClZzlRQzg8GSvzQcc7YAAmgJAALbAclTnENXyJvfCgIfBA",
         caption="Hallihallo {user}. Ich bin der Silberfisch vom Wintower!".format(user=user_name(update.message.from_user)),
         reply_markup=reply_markup,
     )
-
     return CHOOSE_TOPIC
+
+def reply_with_buttoned_question(update: Update, context: CallbackContext, question: str, options: [str]) -> int:
+    buttons = []
+    for option in options:
+        buttons.append(InlineKeyboardButton(text=option, callback_data=option))
+	
+    markup = InlineKeyboardMarkup([buttons])
+    update.message.reply_text(text=question, reply_markup=markup)
 
 def handle_topic_selection(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("typing")

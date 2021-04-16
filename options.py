@@ -24,7 +24,7 @@ OPTIONS = [
         uri="/sisi/piano", 
         label="Klavier", 
         message="Schau, das Klavier aus dem Musikzimmer von der als Sisi bekannten Kaiserin Elisabeth von Österreich.  Soll ich dir mehr über Sisi erzählen?",
-        choices=["/sisi/franz", "/sisi/ende"]
+        choices=["/sisi/wiki", "/sisi/ende"]
     ),
     ChoiceOption(
         uri="/sisi/schuhe", 
@@ -38,19 +38,24 @@ OPTIONS = [
         message="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
         choices=["/",]
     ),
-          ChoiceOption(
+   ChoiceOption(
         uri="/sisi/ende", 
         label="Nein!", 
         message="Ok. Tschööö!",
         choices=["/"]
     ),
-              ChoiceOption(
-        uri="/sisi/franz", 
+    ChoiceOption(
+        uri="/sisi/wiki", 
         label="Ja!", 
         message="WIKIPEDIA ARTIKEL Ich habe auch Objekte von Franz Josef I, dem Mann von Sisi. Soll ich sie dir zeigen?",
+        choices=["/sisi/ende", "/sisi/franz"]
+    ),  
+    ChoiceOption(
+        uri="/sisi/franz", 
+        label="Ja!", 
+        message="Schau, das ist der Badeumhang von Kaiser Franz Joseph I. von Österreich mit einer Echtheitsbestätigung von Eugen Ketterl, dem letzten Kammerdiener seiner Majestät, von vor 1916",
         choices=["/sisi/ende"]
     ),
-          
           
     
     

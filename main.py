@@ -18,7 +18,7 @@ TOKEN = os.getenv('ACCESS_TOKEN')
 
 def start_test(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action(action="typing")
-    update.message.reply_text(text="Hy {user}. I'm a bot, please talk to me!".format(user=user_name(update.message.from_user)))
+    update.message.reply_text(text="Hallihallo {user}. Ich bin der Silberfisch vom Wintower!".format(user=user_name(update.message.from_user)))
 
 def handle_text_message(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("typing")

@@ -1,7 +1,7 @@
 #!/bin/python
 
 import telegram
-from telegram import Update
+from telegram import Update, User
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater
 
@@ -18,7 +18,7 @@ TOKEN = os.getenv('ACCESS_TOKEN')
 
 def start_test(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action(action="typing")
-    update.message.reply_text(text="I'm a bot, please talk to me!")
+    update.message.reply_text(text="Hy {user}. I'm a bot, please talk to me!".format(user=user_name(update.message.from_user)))
 
 def handle_text_message(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("typing")
@@ -29,10 +29,13 @@ def handle_error(update: Update, context: CallbackContext):
     if update and update.message:
         update.message.send_animation(animation="CgACAgQAAxkBAAMVYHm__nCB5m5X5Ki0dphIG6CQHuoAAjYCAAKXztRSxnPha9rxZUQfBA")
 
+def user_name(user: User) -> str:
+    return user.first_name or user.last_name or user.username
+
 def main():
     updater = Updater(token=TOKEN, use_context=True)
     dispatcher = updater.dispatcher
-    dispatcher.add_handler(CommandHandler('start_test', start_test))
+    dispatcher.add_handler(CommandHandler('start', start_test))
     dispatcher.add_handler(MessageHandler(filters=Filters.text, callback=handle_text_message))
     dispatcher.add_error_handler(handle_error)
 

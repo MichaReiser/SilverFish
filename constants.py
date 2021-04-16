@@ -1,2 +1,2 @@
-HUH_FILE_ID = 'CgACAgQAAxkBAAMPYHno7oe6lq15sZRRudHW7aRfSeQAAisCAALMf5RSy6bOGPE0HKUfBA'
-OHOH_FILE_ID = 'CgACAgQAAxkBAAOBYHnyx4IlMA69PINFGa7Zjub1_HYAAj0CAAK-4sRSwWafFSpUMNMfBA'
+HUH_FILE_ID = 'https://media.giphy.com/media/xT5LMzlnGiEBhMFfRm/giphy.gif'
+OHOH_FILE_ID = 'https://media.giphy.com/media/xT5LMzlnGiEBhMFfRm/giphy.gif'

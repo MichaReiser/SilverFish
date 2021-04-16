@@ -2,10 +2,13 @@
 
 from telegram import Update, User, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater, ConversationHandler
+from options import get_option, OPTIONS
+from option import Option
+from constants import HUH_FILE_ID, OHOH_FILE_ID
 
 import os
 from dotenv import load_dotenv
-import logging          
+import logging
 
 load_dotenv()
 logging.basicConfig(level=logging.DEBUG,
@@ -13,23 +16,24 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger()
 
 TOKEN = os.getenv('ACCESS_TOKEN')
-HUH_FILE_ID = 'CgACAgQAAxkBAAMPYHno7oe6lq15sZRRudHW7aRfSeQAAisCAALMf5RSy6bOGPE0HKUfBA'
-OHOH_FILE_ID = 'CgACAgQAAxkBAAOBYHnyx4IlMA69PINFGa7Zjub1_HYAAj0CAAK-4sRSwWafFSpUMNMfBA'
-TOPICS = ['Sisi', 'Trinkgewohnheiten']
 
-CHOOSE_TOPIC = range(1)
+HANDLE_RESPONSE = range(1)
 
 def send_welcome_message(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action(action="typing")
-    reply_markup = ReplyKeyboardMarkup([
-        [topic] for topic in TOPICS],
-    )
     update.message.reply_animation(
         animation="CgACAgQAAxkBAANkYHntZf7AClZzlRQzg8GSvzQcc7YAAmgJAALbAclTnENXyJvfCgIfBA",
-        caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung. Was interessiert dich?".format(user=user_name(update.message.from_user)),
-        reply_markup=reply_markup,
+        caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung.".format(user=user_name(update.message.from_user)),
     )
-    return CHOOSE_TOPIC
+
+    return enter_option(OPTIONS[0], update, context)
+
+def enter_option(option: Option, update: Update, context: CallbackContext) -> int:
+    context.user_data['option'] = option.uri
+
+    option.reply(update, context, get_option)
+
+    return HANDLE_RESPONSE
 
 def reply_with_buttoned_question(update: Update, context: CallbackContext, question: str, options: [str]) -> int:
     buttons = []
@@ -41,20 +45,15 @@ def reply_with_buttoned_question(update: Update, context: CallbackContext, quest
 
 def handle_topic_selection(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("typing")
-    topic = update.message.text
 
+    option = get_option(context.user_data['option'])
+    next_option = option.handle_response(update, context, get_option)
 
-    if not topic in TOPICS:
-        # Huh
-        update.message.reply_animation(
-            animation=HUH_FILE_ID,
-        )
-        return CHOOSE_TOPIC
+    if not next_option:
+        # No new option, stay in current option
+        return HANDLE_RESPONSE
 
-    update.message.reply_text(text="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?", reply_markup=ReplyKeyboardRemove())
-    context.user_data['topic'] = topic
-
-    return ConversationHandler.END
+    enter_option(next_option, update, context)
 
 def handle_unknown_message(update: Update, context: CallbackContext) -> int:
     # Huh
@@ -78,7 +77,7 @@ def main():
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', send_welcome_message)],
         states = {
-            CHOOSE_TOPIC: [
+            HANDLE_RESPONSE: [
                 MessageHandler(Filters.text, handle_topic_selection)
             ]
         },

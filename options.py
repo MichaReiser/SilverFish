@@ -44,7 +44,7 @@ OPTIONS = [
         messages=[
             PhotoMessage(
                 caption="Schau, das Klavier aus dem Musikzimmer von der als Sisi bekannten Kaiserin Elisabeth von Österreich.  Soll ich dir mehr über Sisi erzählen?",
-                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/6157.jpg",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/8599.jpg",
             ),
         ],
         choices=["/sisi/wiki", "/sisi/ende"]

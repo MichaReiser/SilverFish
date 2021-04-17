@@ -5,13 +5,15 @@ from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
 
 from constants import HUH_FILE_ID, OHOH_FILE_ID
+from message import Message, TextMessage
 
 OptionResolver = Callable[[str], Optional['Option']]
 
 class Option:
-    def __init__(self, uri: str, label: str):
+    def __init__(self, uri: str, label: str, message: Message = None, messages: List[Message] = None):
         self.uri = uri
         self.label = label
+        self.messages = messages or ([TextMessage(message)] if message else [])
     
     def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> None:
         raise NotImplementedError("Please implement reply")
@@ -21,9 +23,8 @@ class Option:
 
 
 class ChoiceOption(Option):
-    def __init__(self, uri: str, label: str, message: str, choices: List[str]):
-        super().__init__(uri, label)
-        self.message = message
+    def __init__(self, uri: str, label: str, choices: List[str], message: Message = None, messages: List[Message] = None):
+        super().__init__(uri, label, message, messages)
         self.choices = choices
 
     def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver):
@@ -32,10 +33,12 @@ class ChoiceOption(Option):
             [label] for label in labels],
         )
 
-        update.message.reply_text(
-            text=self.message,
-            reply_markup=reply_markup
-        )
+        *others, end = self.messages
+
+        for other in others:
+            other.send(update)
+
+        end.send(update, reply_markup)
 
     def handle_response(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> Optional[Option]:
         topic = update.message.text

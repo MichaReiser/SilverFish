@@ -73,7 +73,7 @@ OPTIONS = [
                     InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg", caption="Bierkrug aus Erich Honeckers Besitz aus der 2. Hälfte des 20. Jahrhunderts"),
                     InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11348.jpg", caption="Champagnerschalen aus dem Service von Reza Pahlavi, welcher 1925-1941 als letzter Schah von Persien regierte"),
                     InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/5048.jpg", caption="Weinkaraffe aus dem Service von König Ludwig II. von Bayern aus dem 19. Jahrhundert"),
-		            InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/12449.jpg", caption="Bierkrug, den Feldmarshall Montgomery von den sogenannten "Wüstenratten" einer Britischen Division, welche während des 2. Weltkrieges in Nordafrika stationiert war, als Andenken geschenkt bekommen hat"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/12449.jpg", caption="Bierkrug, den Feldmarshall Montgomery von den sogenannten Wüstenratten einer Britischen Division, welche während des 2. Weltkrieges in Nordafrika stationiert war, als Andenken geschenkt bekommen hat"),
                 ],
             ),
             TextMessage("Genug angeheitert, um dich mit dem Tod zu befassen?")

@@ -17,8 +17,8 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger()
 
 TOKEN = os.getenv('ACCESS_TOKEN')
-
-HANDLE_RESPONSE = range(1)
+GO_BACK_TO_QUESTION = "Nein, bitte erzähle weiter"
+HANDLE_RESPONSE, GO_BACK_TO_START = range(2)
 
 def send_welcome_message(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("upload_photo")
@@ -51,11 +51,29 @@ def handle_topic_selection(update: Update, context: CallbackContext) -> int:
     option = get_option(context.user_data['option'])
     next_option = option.handle_response(update, context, get_option)
 
-    if not next_option:
-        # No new option, stay in current option
-        return HANDLE_RESPONSE
+    if not next_option:    
+        update.message.reply_animation(
+            animation=HUH_FILE_ID,
+            reply_markup=ReplyKeyboardMarkup([["Ja"], [GO_BACK_TO_QUESTION]], one_time_keyboard=True),
+            caption="Das habe ich nicht verstanden, möchtest du ein anders Thema auswählen?"
+        )
+
+        return GO_BACK_TO_START
 
     enter_option(next_option, update, context)
+
+def go_back_start(update: Update, context: CallbackContext) -> int:
+    update.message.reply_chat_action("typing")
+    answer = update.message.text
+
+    if answer == GO_BACK_TO_QUESTION:
+        option = get_option(context.user_data['option'])
+    else:
+        option = get_option("/restart")
+    
+    enter_option(option, update, context)
+    
+    return HANDLE_RESPONSE
 
 def handle_unknown_message(update: Update, context: CallbackContext) -> int:
     # Huh
@@ -80,9 +98,14 @@ def main():
         entry_points=[CommandHandler('start', send_welcome_message)],
         states = {
             HANDLE_RESPONSE: [
-	 	CommandHandler('start', send_welcome_message),
-		CallbackQueryHandler(handle_topic_selection_inline),
-		MessageHandler(Filters.text, handle_topic_selection)]
+                CommandHandler('start', send_welcome_message),
+                CallbackQueryHandler(handle_topic_selection_inline),
+                MessageHandler(Filters.text, handle_topic_selection)
+            ],
+            GO_BACK_TO_START: [
+                CommandHandler('start', send_welcome_message),
+                MessageHandler(Filters.text, go_back_start)
+            ]
         },
         fallbacks=[ MessageHandler(Filters.all, handle_unknown_message)]
     )

@@ -63,11 +63,7 @@ class ChoiceOption(Option):
         choice_options = [get_option(choice) for choice in self.choices]
         selected = next((option for option in choice_options if option.label == topic), None)
 
-        if not selected:    
-            update.message.reply_animation(
-                animation=HUH_FILE_ID,
-                reply_markup=self._get_reply_markup(get_option)
-            )
+        if not selected:
             return None
 
         return selected

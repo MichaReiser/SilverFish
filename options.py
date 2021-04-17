@@ -16,7 +16,7 @@ OPTIONS = [
     ),
     ChoiceOption(
         uri="/sisi", 
-        label="Sisi", 
+        label="Sisi (Kaiserin Elisabeth von Österreich)", 
         message="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
         choices=["/sisi/piano", "/sisi/schuhe"]
     ),

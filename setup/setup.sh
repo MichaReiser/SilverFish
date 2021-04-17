@@ -22,9 +22,9 @@ then
 	exit 1;
 fi
 
-#printf "\n> Installiere packages via apt install... " && sleep 2 && apt install -y $(cat packages.list) || { echo "Fehler." && exit 1; } && echo "" && echo "Erfolgreich"
+printf "\n> Installiere packages via apt install... " && sleep 2 && apt install -y $(cat packages.list) || { echo "Fehler." && exit 1; } && echo "" && echo "Erfolgreich"
 
-#printf "\n> Installiere python Pakete via pip3... " && sleep 2 && pip3 install $(cat pip.list) || { echo "Fehler." && exit 1; } && echo "" && echo "Erfolgreich"
+printf "\n> Installiere python Pakete via pip3... " && sleep 2 && pip3 install $(cat pip.list) || { echo "Fehler." && exit 1; } && echo "" && echo "Erfolgreich"
 
 token="$(frage_wert_oder_default "> Access-Token für Telegram-Bot eingeben" "xxx")"
 

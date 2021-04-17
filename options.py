@@ -6,6 +6,12 @@ OPTIONS = [
         uri="/", 
         label="DON't offer this as an option or you'll be fired", 
         message="Was interessiert dich",
+        choices=["/sisi", "/drinkinghabits" "/skkg"]
+    ),
+    ChoiceOption(
+        uri="/skkg", 
+        label="Erzähl mir doch etwas über die Sammlung.", 
+        message="Alle die Objekte hat Bruno Stefanini über fünfzig Jahhre gesammelt. Er interessierte sich für nahezu alles. Die Objekte sind bei mir hier im Depot eingelagert und werden für Ausstellungen an Museen verliehen. Manchamal müssen dann die Mitarbeiter und Mitarbeiterinnen im grossen Depot ein bisschen nach den Objekten suchen, aber bisher haben sie noch immer alles gefunden. Dabei hilft ihnen die Museumsdatenbank. Von dort habe übrigens auch ich meine Infos, die ich dir hier erzähle. All das kann sich doch niemand merken!",
         choices=["/sisi", "/drinkinghabits"]
     ),
     ChoiceOption(

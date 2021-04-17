@@ -157,7 +157,7 @@ OPTIONS = [
    LeafOption(
         uri="/sisi/ende", 
         label="Nein!", 
-        message="Ok. Tschööö!",
+        message="Gut... Lass mich kurz überlegen...",
         next_option="/restart"
     ),
     ChoiceOption(
@@ -172,7 +172,7 @@ OPTIONS = [
         ],
         choices=["/sisi/ende", "/sisi/franz"]
     ),  
-    LeafOption(
+    ChoiceOption(
         uri="/sisi/franz", 
         label="Ja!", 
         messages=[
@@ -180,8 +180,9 @@ OPTIONS = [
                 caption="Schau, das ist der Badeumhang von Kaiser Franz Joseph I. von Österreich mit einer Echtheitsbestätigung von Eugen Ketterl, dem letzten Kammerdiener seiner Majestät, von vor 1916.",
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/25212.jpg",
             ),
+	    TextMessage("Wenn wir schon beim Baden sind... Soll ich dir mehr über die Gesundheit erzählen?"),
         ],
-        next_option="/restart",
+        choices=["/gesundheit", "/sisi/ende"]
     ),  
 ]
 

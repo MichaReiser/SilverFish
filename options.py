@@ -6,7 +6,7 @@ OPTIONS = [
         uri="/", 
         label="DON't offer this as an option or you'll be fired", 
         message="Was interessiert dich",
-        choices=["/sisi", "/drinkinghabits" "/skkg"]
+        choices=["/sisi", "/drinkinghabits", "/skkg"]
     ),
     ChoiceOption(
         uri="/skkg", 

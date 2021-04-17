@@ -150,15 +150,15 @@ OPTIONS = [
         uri="/kaffee/only",
         label="Nur Kaffee, bitte.",
         messages=[ 
-	    TextMessage=("Voilà, Inspirationen für den königlichen Nachmittagskaffee:"),
-	    MedieGroupMessage(
+	        TextMessage("Voilà, Inspirationen für den königlichen Nachmittagskaffee:"),
+	        MedieGroupMessage(
                 media=[
                     InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11595.jpg", caption="24 Kaffeelöffel aus dem Service von König Karl I. von Portugal"),
                     InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23118.jpg", caption="Mokkaservice mit goldenen Bienen aus dem Besitz von Napoleon Bonaparte von ca. 1810"),
-                                 ],
-                             ),
-		TextMessage=("Hübsch, nicht?"),
-	],
+                ],
+            ),
+		    TextMessage("Hübsch, nicht?"),
+	    ],
         next_option="/restart"
     ),
     ChoiceOption(
@@ -177,11 +177,9 @@ OPTIONS = [
         label="Schuhe",
         messages=[
             TextMessage("Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870."),
-            MedieGroupMessage(
-                media=[
-                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg", caption="Paar Turnschuhe von der als Sisi bekannten Kaiserin Elisabeth von Österreich, ca. von 1865-1870"),
-                    
-                ],
+            PhotoMessage(
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg",
+                caption="Paar Turnschuhe von der als Sisi bekannten Kaiserin Elisabeth von Österreich, ca. von 1865-1870",
             ),
             TextMessage("Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.")
         ],
@@ -191,9 +189,9 @@ OPTIONS = [
    LeafOption(
         uri="/alkohol/switch", 
         label="Nein, ich möchte lieber was Trinken…!",
-	message="Ok, moment. Ich bin gleich soweit.",
-	next_option="/drinkinghabits",
-	    ),
+        message="Ok, moment. Ich bin gleich soweit.",
+        next_option="/drinkinghabits",
+    ),
     LeafOption(
         uri="/gesundheit", 
         label="Ja, unbedingt!", 
@@ -241,7 +239,7 @@ OPTIONS = [
                 caption="Schau, das ist der Badeumhang von Kaiser Franz Joseph I. von Österreich mit einer Echtheitsbestätigung von Eugen Ketterl, dem letzten Kammerdiener seiner Majestät, von vor 1916.",
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/25212.jpg",
             ),
-	    TextMessage("Wenn wir schon beim Baden sind... Soll ich dir mehr über die Gesundheit erzählen?"),
+    	    TextMessage("Wenn wir schon beim Baden sind... Soll ich dir mehr über die Gesundheit erzählen?"),
         ],
         choices=["/gesundheit", "/sisi/ende"]
     ),  

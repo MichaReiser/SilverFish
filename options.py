@@ -39,8 +39,8 @@ OPTIONS = [
     ChoiceOption(
         uri="/sisi/schuhe", 
         label="Schuhe", 
-        message="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuheca von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
-        choices=["/gesundheit",]
+        message="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
+        choices=["/gesundheit", "sisi/ende"]
     ),
     ChoiceOption(
         uri="/gesundheit", 

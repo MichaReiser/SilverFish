@@ -10,8 +10,17 @@ OPTIONS = [
         uri="/", 
         label="Erzähl mir etwas anderes, bitte!", 
         message="Was interessiert dich",
-        choices=["/sisi", "/drinkinghabits", "/skkg"]
+     choices=["/sisi", "/drinkinghabits", "/skkg", "/silverfish"]
     ),
+      ChoiceOption(
+        uri="/silverfish",
+        label="Wer bist dann du?",
+        messages=[
+            TextMessage(
+                "Nett, dass du fragst. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen) und wohne hier im Depot\\.",
+                markdown = True,
+            ),
+        choices=["/"]
     ChoiceOption(
         uri="/skkg", 
         label="Erzähl mir doch etwas über die Sammlung.", 

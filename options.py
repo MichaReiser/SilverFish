@@ -167,7 +167,7 @@ OPTIONS = [
         label="Klavier", 
         messages=[
             PhotoMessage(
-                caption="Schau, das Klavier aus dem Musikzimmer von der als Sisi bekannten Kaiserin Elisabeth von Österreich.  Soll ich dir mehr über Sisi erzählen?",
+                caption="Schau, das Klavier aus dem Musikzimmer von der Kaiserin Sisi von Österreich. Soll ich dir mehr über sie erzählen?",
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/12672.jpg",
             ),
         ],

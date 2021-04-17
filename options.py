@@ -139,16 +139,16 @@ OPTIONS = [
         messages=[
             RandomMessage([
                 PhotoMessage(
-                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
-                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg",
+                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: Toilettenspiegel von Hortense de Beauharnais, verziert mit Odalisken und dem Wappen Napoleons, datiert um 1810",
+                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/12094.jpg",
                 ),
                 PhotoMessage(
-                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
-                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg",
+                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: Schminktisch; mit Beleuchtung; Sarah Bernhardt",
+                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects./6471jpg",
                 ),
                 PhotoMessage(
-                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
-                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/51977.jpg",
+                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: Toilettengarnitur von Adolf Hitler von um 1935",
+                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/42838.jpg",
                 ),
             ]),
         ],

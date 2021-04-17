@@ -170,8 +170,14 @@ OPTIONS = [
             ),
             TextMessage("Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.")
         ],
-        choices=["/gesundheit", "/sisi/ende"]
+        choices=["/gesundheit", "/sisi/ende", "/alkohol/switch"]
     ),
+	
+   LeafOption(
+        uri="/alkohol/switch", 
+        label="Nein, ich möchte lieber was Trinken…!",
+	next_option="/drinkinghabits",
+	    ),
     LeafOption(
         uri="/gesundheit", 
         label="Ja, unbedingt!", 

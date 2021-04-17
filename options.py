@@ -91,7 +91,7 @@ OPTIONS = [
         label="uuh... morbide! Ja, gerne!",
 	    messages=[
             PhotoMessage(
-                caption="Schau, die getrockneten Blumen vom Katafalk Franz Josephs I. als Erinnerungsstück an sein Begräbnis 1916, aus dem Besitz der Schauspielerin Katharina Schratt.",
+                caption="Schau, die getrockneten Blumen vom Katafalk Franz Josephs I. ein Erinnerungsstück an sein Begräbnis 1916, aus dem Besitz der Schauspielerin Katharina Schratt.",
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/43214.jpg",
             ),
             TextMessage(

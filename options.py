@@ -17,7 +17,7 @@ OPTIONS = [
         label="Erzähl mir doch etwas über die Sammlung.", 
         messages=[
            PhotoMessage(
-            photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/BST.jpg",),
+            photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/bst.jpg",),
             TextMessage("Alle die Objekte hat Bruno Stefanini über fünfzig Jahre hinweg gesammelt. Er interessierte sich für nahezu alles. Die Objekte sind bei mir hier im Depot eingelagert und werden für Ausstellungen an Museen verliehen. Manchamal müssen dann die Mitarbeiter und Mitarbeiterinnen im grossen Depot ein bisschen nach den Objekten suchen, aber bisher haben sie noch immer alles gefunden. Dabei hilft ihnen die Museumsdatenbank. Von dort habe übrigens auch ich meine Infos, die ich dir hier erzähle. All das kann sich doch niemand merken!"),
             TextMessage("Worüber soll ich dir nun etwas erzählen?"),
         ],
@@ -46,7 +46,7 @@ OPTIONS = [
         messages=[
             PhotoMessage(
                 caption="Schau, das Klavier aus dem Musikzimmer von der als Sisi bekannten Kaiserin Elisabeth von Österreich.  Soll ich dir mehr über Sisi erzählen?",
-                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/8599.jpg",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/12672.jpg",
             ),
         ],
         choices=["/sisi/wiki", "/sisi/ende"]
@@ -57,7 +57,7 @@ OPTIONS = [
         messages=[
             PhotoMessage(
                 caption="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
-                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/15030.jpg",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg",
             ),
       	], 
         choices=["/gesundheit", "/sisi/ende"]
@@ -107,7 +107,7 @@ OPTIONS = [
         messages=[
             PhotoMessage(
                 caption="Schau, das ist der Badeumhang von Kaiser Franz Joseph I. von Österreich mit einer Echtheitsbestätigung von Eugen Ketterl, dem letzten Kammerdiener seiner Majestät, von vor 1916.",
-                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/13091.jpg",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/25212.jpg",
             ),
         ],
         choices=["/"]

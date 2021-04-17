@@ -1,6 +1,6 @@
 from typing import Optional
 from option import Option, ChoiceOption, LeafOption
-from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage
+from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage, AnimationMessage
 
 from telegram import MessageEntity, InputMediaPhoto
 
@@ -89,7 +89,8 @@ OPTIONS = [
     ChoiceOption(
         uri="/tod",
         label="uuh... morbide! Ja, gerne!",
-	messages=[ PhotoMessage(
+	    messages=[
+            PhotoMessage(
                 caption="Schau, die getrockneten Blumen vom Katafalk Franz Josephs I. als Erinnerungsstück an sein Begräbnis 1916, aus dem Besitz der Schauspielerin Katharina Schratt.",
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/43214.jpg",
             ),
@@ -109,10 +110,10 @@ OPTIONS = [
     ChoiceOption(
         uri="/kaffee",
         label="Kaffee",
-    messages=[
-            PhotoMessage(photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/fish_coffee_cigarett.gif "),
+        messages=[
+            AnimationMessage(animation_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/fish_coffee_cigarett.gif "),
             TextMessage("Coffee and Cigaretts!"),
-             ],
+        ],
         choices=["/kaffee/cigaretts", "/kaffee/only"]
     ),
 

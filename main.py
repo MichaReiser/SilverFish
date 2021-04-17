@@ -1,7 +1,7 @@
 #!/bin/python
 
 from telegram import Update, User, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater, ConversationHandler
+from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater, ConversationHandler, CallbackQueryHandler
 from options import get_option, OPTIONS
 from option import Option
 from constants import HUH_FILE_ID, OHOH_FILE_ID
@@ -25,23 +25,26 @@ def send_welcome_message(update: Update, context: CallbackContext) -> int:
         animation="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/sliverfish.gif?token=AAJF5KPFYHW4VZY22CAF3NTAPIIZ6",
         caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung.".format(user=user_name(update.message.from_user)),
     )
-
     return enter_option(OPTIONS[0], update, context)
 
 def enter_option(option: Option, update: Update, context: CallbackContext) -> int:
     context.user_data['option'] = option.uri
 
-    option.reply(update, context, get_option)
+    option.reply(update, context, get_option, inline=True)
 
     return HANDLE_RESPONSE
 
-def reply_with_buttoned_question(update: Update, context: CallbackContext, question: str, options: [str]) -> int:
-    buttons = []
-    for option in options:
-        buttons.append(InlineKeyboardButton(text=option, callback_data=option))
-	
-    markup = InlineKeyboardMarkup([buttons])
-    update.message.reply_text(text=question, reply_markup=markup)
+def handle_topic_selection2(update: Update, context: CallbackContext) -> int:
+    query = update.callback_query
+    query.answer()
+    #query.edit_message_text("Du hast {choice} gewählt.".format(choice=query.data))
+    option = get_option(context.user_data['option'])
+    next_option = option.handle_response(update, context, get_option)
+    enter_option(next_option, update, context)
+    #next_option = get_option(context.user_data['option'])
+    #next_option.reply(update, context, get_option)
+    #context.user_data['option'] = next_option.uri
+    return HANDLE_RESPONSE
 
 def handle_topic_selection(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("typing")
@@ -79,8 +82,8 @@ def main():
         states = {
             HANDLE_RESPONSE: [
 	 	CommandHandler('start', send_welcome_message),
-		MessageHandler(Filters.text, handle_topic_selection),
-            ]
+		CallbackQueryHandler(handle_topic_selection2),
+		MessageHandler(Filters.text, handle_topic_selection)]
         },
         fallbacks=[ MessageHandler(Filters.all, handle_unknown_message)]
     )

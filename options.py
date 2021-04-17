@@ -1,16 +1,39 @@
 from typing import Optional
-from option import Option, ChoiceOption
+from option import Option, ChoiceOption, LeafOption
 from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage
 
-from telegram import MessageEntity
+from telegram import MessageEntity, InputMediaPhoto
 
 
 OPTIONS = [
     ChoiceOption(
         uri="/", 
         label="Erzähl mir etwas anderes, bitte!", 
-        message="Was interessiert dich",
-        choices=["/sisi", "/drinkinghabits", "/skkg"]
+        message="Was interessiert dich?",
+        choices=["/sisi", "/drinkinghabits", "/skkg", "/silverfish"]
+    ),
+      LeafOption(
+        uri="/silverfish",
+        label="Wer bist dann du?",
+        messages=[
+            TextMessage(
+                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen) und wohne hier im Depot\\.",
+                markdown = True,
+            ),
+        ],
+        next_option="/restart",
+    ),
+    ChoiceOption(
+        uri="/restart",
+        label="Was hälst du von?",
+        messages=[
+            RandomMessage([
+                TextMessage("Wie wäre es mit?"),
+                TextMessage("Was hältst du von?")
+            ])
+        ],
+        # TODO create new choice option that randomly picks a sublist if there are too man (and offers an option to show other options as well)
+        choices=["/sisi", "/drinkinghabits", "/skkg", "/silverfish"],
     ),
     ChoiceOption(
         uri="/skkg", 
@@ -33,10 +56,55 @@ OPTIONS = [
         ],
         choices=["/sisi/piano", "/sisi/schuhe"]
     ),
-    ChoiceOption(
+     ChoiceOption(
         uri="/drinkinghabits",
-        label="Trinkgewohnheiten",
-        message="Kaffee oder Alkohol?",
+        label="Historische Trinkgewohnheiten",
+        message="Für welches Getränk interessierst du dich? Kaffee oder Alkohol?",
+        choices=["/kaffee","/"]
+    ),
+
+ ChoiceOption(
+        uri="/kaffee",
+        label="Kaffee",
+        message="Coffee and Cigaretts!",
+        choices=["/kaffee/cigaretts", "/kaffee/only"]
+    ),
+
+ ChoiceOption(
+        uri="/kaffee/cigaretts",
+        label="Erzähl mir mehr...",
+	messages=[
+            TextMessage("Hier eine Zusammenstellung  von Objekten zum Thema Coffee and Cigaretts:"),
+            MedieGroupMessage(
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11595.jpg", caption="24 Kaffeelöffel aus dem Service von König Karl I. von Portugal"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23072.jpg", caption="Milchkanne aus dem Service der Luzerner Hotelière Katharina Morel-Peyer von ca. 1810"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23118.jpg", caption="Mokkaservice mit goldenen Bienen aus dem Besitz von Napoleon Bonaparte von ca. 1810"),
+		    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg", caption="Zigarettenetui, welches die Schauspielerin Katharina Schratt 1911 von ihrem Verehrer Erzherzog Franz Salvator zu Wihnachten geschenkt bekam"),
+		    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/51650.jpg", caption="Zigarettenetui von Prinz Friedlich Leopold von Preussen, wohl um die letzte Jahrhundertwende"),
+                ],
+            ),
+            TextMessage("…noch ein Filmtipp gefällig?")
+        ],
+       
+        choices=["/kaffee/cigaretts/film", "/"]
+    ),
+
+ChoiceOption(
+        uri="/kaffee/cigaretts/film",
+        label="Ja, gerne!",
+        messages=[
+            TextMessage(
+                "Der Film [Coffee and Cigarettes](https://www.youtube.com/watch?v=mM6Mpn0-eyQ), von Jim Jarmusch ist einer meiner Lieblingsfilme\\.",
+                markdown = True,
+            ),
+        choices=["/"]
+    ),
+
+ChoiceOption(
+        uri="/kaffee/only",
+        label="Nur Kaffee, bitte.",
+        message="Voilà, Inspirationen für den königlichen Nachmittagskaffee: 8855; 11750.1; 11791",
         choices=["/"]
     ),
       ChoiceOption(
@@ -54,19 +122,19 @@ OPTIONS = [
         uri="/sisi/schuhe", 
         label="Schuhe",
         messages=[
+            TextMessage("Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870."),
             MedieGroupMessage(
-                photo_urls=[
-                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg",
-                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg",
-                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg",
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg", caption="Test"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg", caption="Test"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg", caption="Test"),
                 ],
-                caption="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870.",
             ),
             TextMessage("Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.")
         ],
         choices=["/gesundheit", "/sisi/ende"]
     ),
-    ChoiceOption(
+    LeafOption(
         uri="/gesundheit", 
         label="Ja, unbedingt!", 
         messages=[
@@ -85,13 +153,13 @@ OPTIONS = [
                 ),
             ]),
         ],
-        choices=["/",]
+        next_option="/restart",
     ),
-   ChoiceOption(
+   LeafOption(
         uri="/sisi/ende", 
         label="Nein!", 
         message="Ok. Tschööö!",
-        choices=["/"]
+        next_option="/restart"
     ),
     ChoiceOption(
         uri="/sisi/wiki", 
@@ -105,7 +173,7 @@ OPTIONS = [
         ],
         choices=["/sisi/ende", "/sisi/franz"]
     ),  
-    ChoiceOption(
+    LeafOption(
         uri="/sisi/franz", 
         label="Ja!", 
         messages=[
@@ -114,11 +182,8 @@ OPTIONS = [
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/25212.jpg",
             ),
         ],
-        choices=["/"]
-    ),
-          
-    
-    
+        next_option="/restart",
+    ),  
 ]
 
 BY_URI = {option.uri: option for option in OPTIONS}

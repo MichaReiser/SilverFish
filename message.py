@@ -45,21 +45,18 @@ class MedieGroupMessage(Message):
     """
     Sends multiple photos in a single message
     """
-    def __init__(self, photo_urls: List[str], caption: str):
+    def __init__(self, media: List[InputMediaPhoto]):
         super().__init__()
 
-        if len(photo_urls) < 2:
+        if len(media) < 2:
             raise Exception("You must specify at least two items")
 
-        self.photo_urls = photo_urls
-        self.caption = caption
+        self.media = media
 
     def send(self, update: Update, reply_markup: ReplyMarkup = None) -> None:
         update.message.reply_chat_action('upload_photo')
         update.message.reply_media_group(
-            media=[
-                InputMediaPhoto(media=photo_url, caption="Test") for photo_url in self.photo_urls
-            ],
+            media=self.media,
         )
 
 class RandomMessage(Message):

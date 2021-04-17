@@ -94,7 +94,11 @@ OPTIONS = [
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/43214.jpg",
             ),
             TextMessage(
-                "Falls du dich gerade fragst, was genau ein [Kataphalk](https://de.wikipedia.org/wiki/Katafalk) ist, verlinke ich dir hier mal den Wiki\\-Artikel\\. Und wenn dich Franzls Frau Sisi interessiert, kann ich dir gerne mehr zu ihr zeigen\\. Was meinst du?",
+                "Falls du dich gerade fragst, was genau ein [Kataphalk](https://de.wikipedia.org/wiki/Katafalk) ist, verlinke ich dir hier mal den Wiki\\-Artikel\\.",
+                markdown = True,
+            ),
+		  TextMessage(
+                "Und wenn dich Franzls Frau Sisi interessiert, kann ich dir gerne mehr zu ihr zeigen\\. Was meinst du?",
                 markdown = True,
             ),
         ],

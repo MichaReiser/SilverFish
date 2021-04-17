@@ -23,7 +23,7 @@ HANDLE_RESPONSE = range(1)
 def send_welcome_message(update: Update, context: CallbackContext) -> int:
     update.message.reply_chat_action("upload_photo")
     update.message.reply_animation(
-        animation="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/sliverfish.gif?token=AAJF5KPFYHW4VZY22CAF3NTAPIIZ6",
+        animation="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/fish_hi_gif.gif",
         caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung.".format(user=user_name(update.message.from_user)),
     )
 

@@ -143,11 +143,20 @@ OPTIONS = [
         ],
         choices=["/"],
     ),
-    ChoiceOption(
+    LeafOption(
         uri="/kaffee/only",
         label="Nur Kaffee, bitte.",
-        message="Voilà, Inspirationen für den königlichen Nachmittagskaffee: 8855; 11750.1; 11791",
-        choices=["/"]
+        messages=[ 
+	    TextMessage=("Voilà, Inspirationen für den königlichen Nachmittagskaffee:"),
+	    MedieGroupMessage(
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11595.jpg", caption="24 Kaffeelöffel aus dem Service von König Karl I. von Portugal"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23118.jpg", caption="Mokkaservice mit goldenen Bienen aus dem Besitz von Napoleon Bonaparte von ca. 1810"),
+                                 ],
+                             ),
+		TextMessage=("Hübsch, nicht?"),
+	],
+        next_option="/restart"
     ),
     ChoiceOption(
         uri="/sisi/piano", 
@@ -167,9 +176,8 @@ OPTIONS = [
             TextMessage("Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870."),
             MedieGroupMessage(
                 media=[
-                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg", caption="Test"),
-                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg", caption="Test"),
-                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg", caption="Test"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg", caption="Paar Turnschuhe von der als Sisi bekannten Kaiserin Elisabeth von Österreich, ca. von 1865-1870"),
+                    
                 ],
             ),
             TextMessage("Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.")

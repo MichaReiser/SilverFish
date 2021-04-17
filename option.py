@@ -1,5 +1,6 @@
 #!/bin/python
 
+import random
 from typing import List, Optional, Callable
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
@@ -17,6 +18,14 @@ class Option:
     
     def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> None:
         raise NotImplementedError("Please implement reply")
+
+    def _send_messages(self, update: Update, reply_markup: ReplyKeyboardMarkup = None) -> None:
+        *others, end = self.messages
+
+        for other in others:
+            other.send(update)
+
+        end.send(update, reply_markup=reply_markup)
 
     def handle_response(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> bool:
         raise NotImplementedError("Please implement handle_response")
@@ -47,12 +56,7 @@ class ChoiceOption(Option):
             else:
                 self.reply_with_buttoned_question(update, context, self.message, labels)
         else:
-            *others, end = self.messages
-
-            for other in others:
-                other.send(update)
-
-            end.send(update, reply_markup=self._get_reply_markup(get_option))
+            self._send_messages(update, self._get_reply_markup(get_option))
 
     def handle_response(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> Optional[Option]:
         topic = update.callback_query.data if update.callback_query is not None else update.message.text
@@ -71,3 +75,20 @@ class ChoiceOption(Option):
     def _get_reply_markup(self, get_option: OptionResolver):
         labels = [get_option(choice).label for choice in self.choices]
         return ReplyKeyboardMarkup([[label] for label in labels], one_time_keyboard=True)
+
+class LeafOption(Option):
+    def __init__(self, uri: str, label: str, next_option: str, message: Message = None, messages: List[Message] = None):
+        super().__init__(uri, label, message, messages)
+        self.next_option = next_option
+
+    def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver):
+        self._send_messages(update)
+        update.message.reply_chat_action("typing")
+
+        next = get_option(self.next_option)
+        context.job_queue.run_once(lambda _c: next.reply(update, context, get_option), random.randrange(3, 6))
+
+        context.user_data['option'] = next.uri
+
+    def handle_response(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> Optional[Option]:
+        return None

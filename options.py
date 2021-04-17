@@ -1,5 +1,5 @@
 from typing import Optional
-from option import Option, ChoiceOption
+from option import Option, ChoiceOption, LeafOption
 from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage
 
 from telegram import MessageEntity, InputMediaPhoto
@@ -12,7 +12,7 @@ OPTIONS = [
         message="Was interessiert dich?",
         choices=["/sisi", "/drinkinghabits", "/skkg", "/silverfish"]
     ),
-      ChoiceOption(
+      LeafOption(
         uri="/silverfish",
         label="Wer bist dann du?",
         messages=[
@@ -21,7 +21,7 @@ OPTIONS = [
                 markdown = True,
             ),
         ],
-        choices=["/"],
+        next_option="/restart",
     ),
     ChoiceOption(
         uri="/restart",
@@ -56,11 +56,11 @@ OPTIONS = [
         ],
         choices=["/sisi/piano", "/sisi/schuhe"]
     ),
-    ChoiceOption(
+    LeafOption(
         uri="/drinkinghabits",
         label="Trinkgewohnheiten",
         message="Kaffee oder Alkohol?",
-        choices=["/restart"]
+        next_option="/restart",
     ),
       ChoiceOption(
         uri="/sisi/piano", 
@@ -89,7 +89,7 @@ OPTIONS = [
         ],
         choices=["/gesundheit", "/sisi/ende"]
     ),
-    ChoiceOption(
+    LeafOption(
         uri="/gesundheit", 
         label="Ja, unbedingt!", 
         messages=[
@@ -108,13 +108,13 @@ OPTIONS = [
                 ),
             ]),
         ],
-        choices=["/restart",]
+        next_option="/restart",
     ),
-   ChoiceOption(
+   LeafOption(
         uri="/sisi/ende", 
         label="Nein!", 
         message="Ok. Tschööö!",
-        choices=["/restart"]
+        next_option="/restart"
     ),
     ChoiceOption(
         uri="/sisi/wiki", 
@@ -128,7 +128,7 @@ OPTIONS = [
         ],
         choices=["/sisi/ende", "/sisi/franz"]
     ),  
-    ChoiceOption(
+    LeafOption(
         uri="/sisi/franz", 
         label="Ja!", 
         messages=[
@@ -137,11 +137,8 @@ OPTIONS = [
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/25212.jpg",
             ),
         ],
-        choices=["/restart"]
-    ),
-          
-    
-    
+        next_option="/restart",
+    ),  
 ]
 
 BY_URI = {option.uri: option for option in OPTIONS}

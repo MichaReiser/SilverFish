@@ -60,9 +60,39 @@ OPTIONS = [
         uri="/drinkinghabits",
         label="Historische Trinkgewohnheiten",
         message="Für welches Getränk interessierst du dich? Kaffee oder Alkohol?",
-        choices=["/kaffee","/"]
+        choices=["/kaffee","/alkohol"]
     ),
-
+    ChoiceOption(
+        uri="/alkohol",
+        label="Alkohol",
+        messages=[
+            TextMessage("Prost!"),
+            MedieGroupMessage(
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/43083.jpg", caption="Bowlen-Set, ein Ehrengeschenk von Kaiser Wilhelm II. an den Kampfpiloten Freiherr von Richthofen im Jahre 1917"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg", caption="Bierkrug aus Erich Honeckers Besitz aus der 2. Hälfte des 20. Jahrhunderts"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11348.jpg", caption="Champagnerschalen aus dem Service von Reza Pahlavi, welcher 1925-1941 als letzter Schah von Persien regierte"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/5048.jpg", caption="Weinkaraffe aus dem Service von König Ludwig II. von Bayern aus dem 19. Jahrhundert"),
+		            InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/12449.jpg", caption="Bierkrug, den Feldmarshall Montgomery von den sogenannten "Wüstenratten" einer Britischen Division, welche während des 2. Weltkrieges in Nordafrika stationiert war, als Andenken geschenkt bekommen hat"),
+                ],
+            ),
+            TextMessage("Genug angeheitert, um dich mit dem Tod zu befassen?")
+        ],
+        choices=["/tod","/alkohol/ende"]
+    ),
+   LeafOption(
+        uri="/alkohol/ende", 
+        label="Danke, aber nein Danke!", 
+        message="Gut... Lass mich kurz überlegen...",
+        next_option="/restart"
+    ),
+    ChoiceOption(
+        uri="/tod",
+        label="uuh... morbide! Ja, gerne!",
+        message="TDB",
+        choices=["/", "/sisi"]
+    ),	
+	
     ChoiceOption(
         uri="/kaffee",
         label="Kaffee",

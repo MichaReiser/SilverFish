@@ -2,7 +2,7 @@ from typing import Optional
 from option import Option, ChoiceOption
 from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage
 
-from telegram import MessageEntity
+from telegram import MessageEntity, InputMediaPhoto
 
 
 OPTIONS = [
@@ -54,13 +54,13 @@ OPTIONS = [
         uri="/sisi/schuhe", 
         label="Schuhe",
         messages=[
+            TextMessage("Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870."),
             MedieGroupMessage(
-                photo_urls=[
-                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg",
-                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg",
-                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg",
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg", caption="Test"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg", caption="Test"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg", caption="Test"),
                 ],
-                caption="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870.",
             ),
             TextMessage("Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.")
         ],

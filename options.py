@@ -89,8 +89,17 @@ OPTIONS = [
     ChoiceOption(
         uri="/tod",
         label="uuh... morbide! Ja, gerne!",
-        message="TDB",
-        choices=["/", "/sisi"]
+	messages=[ PhotoMessage(
+                caption="Schau, die getrockneten Blumen vom Katafalk Franz Josephs I. als Erinnerungsstück an sein Begräbnis 1916, aus dem Besitz der Schauspielerin Katharina Schratt.",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/43214.jpg",
+            ),
+            TextMessage(
+                "Falls du dich gerade fragst, was genau ein [Kataphalk](https://de.wikipedia.org/wiki/Katafalk) ist, verlinke ich dir hier mal den Wiki\\-Artikel\\. Und wenn dich Franzls Frau Sisi interessiert, kann ich dir gerne mehr zu ihr zeigen\\. Was meinst du?",
+                markdown = True,
+            ),
+        ],
+        
+        choices=["/sisi", "/"]
     ),	
 	
     ChoiceOption(

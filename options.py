@@ -1,6 +1,6 @@
 from typing import Optional
 from option import Option, ChoiceOption, LeafOption
-from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage
+from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage, AnimationMessage
 
 from telegram import MessageEntity, InputMediaPhoto
 
@@ -14,10 +14,10 @@ OPTIONS = [
     ),
     LeafOption(
         uri="/silverfish",
-        label="Wer bist dann du?",
+        label="Erzähl mir mehr von dir.",
         messages=[
             TextMessage(
-                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen) und wohne hier im Depot\\.",
+                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen), wohne hier im Depot und kümmere mich um den Erhalt der Sammlung\\.",
                 markdown = True,
             ),
         ],
@@ -25,11 +25,11 @@ OPTIONS = [
     ),
     ChoiceOption(
         uri="/restart",
-        label="Was hälst du von?",
+        label="Soll ich dir etwas anderes erzählen?",
         messages=[
             RandomMessage([
-                TextMessage("Wie wäre es mit?"),
-                TextMessage("Was hältst du von?")
+                TextMessage("Soll ich dir etwas anderes erzählen?"),
+                TextMessage("Interessiert dich eines dieser Themen?")
             ])
         ],
         # TODO create new choice option that randomly picks a sublist if there are too man (and offers an option to show other options as well)
@@ -40,7 +40,7 @@ OPTIONS = [
         label="Erzähl mir doch etwas über die Sammlung.", 
         messages=[
             PhotoMessage(photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/bst.jpg"),
-            TextMessage("Alle die Objekte hat Bruno Stefanini über fünfzig Jahre hinweg gesammelt. Er interessierte sich für nahezu alles. Die Objekte sind bei mir hier im Depot eingelagert und werden für Ausstellungen an Museen verliehen. Manchamal müssen dann die Mitarbeiter und Mitarbeiterinnen im grossen Depot ein bisschen nach den Objekten suchen, aber bisher haben sie noch immer alles gefunden. Dabei hilft ihnen die Museumsdatenbank. Von dort habe übrigens auch ich meine Infos, die ich dir hier erzähle. All das kann sich doch niemand merken!"),
+            TextMessage("All die Objekte hat Bruno Stefanini über fünfzig Jahre hinweg gesammelt. Er interessierte sich für nahezu alles. Die Objekte sind bei mir hier im Depot eingelagert und werden für Ausstellungen an Museen verliehen. Manchmal müssen dann die Mitarbeiter und Mitarbeiterinnen im grossen Depot ein bisschen nach den Objekten suchen, aber bisher haben sie noch immer alles gefunden. Dabei hilft ihnen die Museumsdatenbank. Von dort habe übrigens auch ich meine Infos, die ich dir hier erzähle. All das kann sich doch niemand merken!"),
             TextMessage("Worüber soll ich dir nun etwas erzählen?"),
         ],
         choices=["/sisi", "/drinkinghabits"]
@@ -50,7 +50,7 @@ OPTIONS = [
         label="Sisi (Kaiserin Elisabeth von Österreich)", 
         messages=[
             TextMessage(
-                "Du interessierst dichs für die [Kaiserin Elisabeth von Österreich](https://de.wikipedia.org/wiki/Elisabeth_von_%C3%96sterreich-Ungarn)\\. Ich habe ganz viele Objekte von ihr hier\\. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
+                "Du interessierst dich für die [Kaiserin Elisabeth von Österreich](https://de.wikipedia.org/wiki/Elisabeth_von_%C3%96sterreich-Ungarn)\\. Ich habe ganz viele Objekte von ihr hier\\. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
                 markdown = True,
             ),
         ],
@@ -60,13 +60,60 @@ OPTIONS = [
         uri="/drinkinghabits",
         label="Historische Trinkgewohnheiten",
         message="Für welches Getränk interessierst du dich? Kaffee oder Alkohol?",
-        choices=["/kaffee","/"]
+        choices=["/kaffee","/alkohol"]
     ),
-
+    ChoiceOption(
+        uri="/alkohol",
+        label="Alkohol",
+        messages=[
+            TextMessage("Prost!"),
+            MedieGroupMessage(
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/43083.jpg", caption="Bowlen-Set, ein Ehrengeschenk von Kaiser Wilhelm II. an den Kampfpiloten Freiherr von Richthofen im Jahre 1917"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg", caption="Bierkrug aus Erich Honeckers Besitz aus der 2. Hälfte des 20. Jahrhunderts"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11348.jpg", caption="Champagnerschalen aus dem Service von Reza Pahlavi, welcher 1925-1941 als letzter Schah von Persien regierte"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/5048.jpg", caption="Weinkaraffe aus dem Service von König Ludwig II. von Bayern aus dem 19. Jahrhundert"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/12449.jpg", caption="Bierkrug, den Feldmarshall Montgomery von den sogenannten Wüstenratten einer Britischen Division, welche während des 2. Weltkrieges in Nordafrika stationiert war, als Andenken geschenkt bekommen hat"),
+                ],
+            ),
+            TextMessage("Genug angeheitert, um dich mit dem Tod zu befassen?")
+        ],
+        choices=["/tod","/alkohol/ende"]
+    ),
+   LeafOption(
+        uri="/alkohol/ende", 
+        label="Danke, aber nein Danke!", 
+        message="Gut... Lass mich kurz überlegen...",
+        next_option="/restart"
+    ),
+    ChoiceOption(
+        uri="/tod",
+        label="uuh... morbide! Ja, gerne!",
+	    messages=[
+            PhotoMessage(
+                caption="Schau, die getrockneten Blumen vom Katafalk Franz Josephs I. ein Erinnerungsstück an sein Begräbnis 1916, aus dem Besitz der Schauspielerin Katharina Schratt.",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/43214.jpg",
+            ),
+            TextMessage(
+                "Falls du dich gerade fragst, was genau ein [Kataphalk](https://de.wikipedia.org/wiki/Katafalk) ist, verlinke ich dir hier mal den Wiki\\-Artikel\\.",
+                markdown = True,
+            ),
+		  TextMessage(
+                "Und wenn dich Franzls Frau Sisi interessiert, kann ich dir gerne mehr zu ihr zeigen\\. Was meinst du?",
+                markdown = True,
+            ),
+        ],
+        
+        choices=["/sisi", "/"]
+    ),	
+	
     ChoiceOption(
         uri="/kaffee",
         label="Kaffee",
-        message="Coffee and Cigaretts!",
+        messages=[
+            AnimationMessage(animation_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/fish_coffee_cigarett.gif "),
+            TextMessage("Coffee and Cigaretts!"),
+        ],
         choices=["/kaffee/cigaretts", "/kaffee/only"]
     ),
 
@@ -100,11 +147,20 @@ OPTIONS = [
         ],
         choices=["/"],
     ),
-    ChoiceOption(
+    LeafOption(
         uri="/kaffee/only",
         label="Nur Kaffee, bitte.",
-        message="Voilà, Inspirationen für den königlichen Nachmittagskaffee: 8855; 11750.1; 11791",
-        choices=["/"]
+        messages=[ 
+	        TextMessage("Voilà, Inspirationen für den königlichen Nachmittagskaffee:"),
+	        MedieGroupMessage(
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11595.jpg", caption="24 Kaffeelöffel aus dem Service von König Karl I. von Portugal"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23118.jpg", caption="Mokkaservice mit goldenen Bienen aus dem Besitz von Napoleon Bonaparte von ca. 1810"),
+                ],
+            ),
+		    TextMessage("Hübsch, nicht?"),
+	    ],
+        next_option="/restart"
     ),
     ChoiceOption(
         uri="/sisi/piano", 
@@ -122,16 +178,20 @@ OPTIONS = [
         label="Schuhe",
         messages=[
             TextMessage("Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870."),
-            MedieGroupMessage(
-                media=[
-                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg", caption="Test"),
-                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg", caption="Test"),
-                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg", caption="Test"),
-                ],
+            PhotoMessage(
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg",
+                caption="Paar Turnschuhe von der als Sisi bekannten Kaiserin Elisabeth von Österreich, ca. von 1865-1870",
             ),
             TextMessage("Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.")
         ],
-        choices=["/gesundheit", "/sisi/ende"]
+        choices=["/gesundheit", "/sisi/ende", "/alkohol/switch"]
+    ),
+	
+   LeafOption(
+        uri="/alkohol/switch", 
+        label="Nein, ich möchte lieber was Trinken…!",
+        message="Ok, moment. Ich bin gleich soweit.",
+        next_option="/drinkinghabits",
     ),
     LeafOption(
         uri="/gesundheit", 
@@ -157,7 +217,7 @@ OPTIONS = [
    LeafOption(
         uri="/sisi/ende", 
         label="Nein!", 
-        message="Ok. Tschööö!",
+        message="Gut... Lass mich kurz überlegen...",
         next_option="/restart"
     ),
     ChoiceOption(
@@ -172,7 +232,7 @@ OPTIONS = [
         ],
         choices=["/sisi/ende", "/sisi/franz"]
     ),  
-    LeafOption(
+    ChoiceOption(
         uri="/sisi/franz", 
         label="Ja!", 
         messages=[
@@ -180,8 +240,9 @@ OPTIONS = [
                 caption="Schau, das ist der Badeumhang von Kaiser Franz Joseph I. von Österreich mit einer Echtheitsbestätigung von Eugen Ketterl, dem letzten Kammerdiener seiner Majestät, von vor 1916.",
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/25212.jpg",
             ),
+    	    TextMessage("Wenn wir schon beim Baden sind... Soll ich dir mehr über die Gesundheit erzählen?"),
         ],
-        next_option="/restart",
+        choices=["/gesundheit", "/sisi/ende"]
     ),  
 ]
 

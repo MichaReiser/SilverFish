@@ -41,6 +41,23 @@ class PhotoMessage(Message):
             reply_markup=reply_markup,
         )
 
+class AnimationMessage(Message):
+    """
+    Sends a animation (GIF or video)
+    """
+    def __init__(self, animation_url: str, caption: str = None):
+        super().__init__()
+        self.animation_url = animation_url
+        self.caption = caption
+    
+    def send(self, update: Update, reply_markup: ReplyMarkup = None) -> None:
+        update.message.reply_chat_action('upload_photo')
+        update.message.reply_animation(
+            animation = self.animation_url,
+            caption=self.caption,
+            reply_markup=reply_markup,
+        )
+
 class MedieGroupMessage(Message):
     """
     Sends multiple photos in a single message

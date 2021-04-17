@@ -23,9 +23,10 @@ class Option:
 
 
 class ChoiceOption(Option):
-    def __init__(self, uri: str, label: str, choices: List[str], message: Message = None, messages: List[Message] = None):
+    def __init__(self, uri: str, label: str, choices: List[str], message: Message = None, messages: List[Message] = None, inline: bool = False):
         super().__init__(uri, label, message, messages)
         self.choices = choices  
+        self.inline = inline
 
     def reply_with_buttoned_question(self, update: Update, context: CallbackContext, question: str, options: List[str]) -> int:
         buttons = []
@@ -35,10 +36,10 @@ class ChoiceOption(Option):
         markup = InlineKeyboardMarkup([buttons])
         update.message.reply_text(text=question, reply_markup=markup)
 
-    def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver, inline: bool):
+    def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver):
         labels = [get_option(choice).label for choice in self.choices]
         
-        if inline:
+        if self.inline:
             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data=label) for label in labels]])
             if update.callback_query is not None:
                 query = update.callback_query

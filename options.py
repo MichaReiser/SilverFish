@@ -71,12 +71,11 @@ OPTIONS = [
         uri="/sisi/wiki", 
         label="Ja!", 
         messages=[
-        TextMessage(
-                "Kennst [Kaiser Franz Josef I.](https://de.wikipedia.org/wiki/Franz_Joseph_I.), dem Mann von Sisi\\. Ich habe dir hier den Wiki-Artikel herausgesucht\\. ",
+            TextMessage(
+                "Kennst [Kaiser Franz Josef I\\.](https://de.wikipedia.org/wiki/Franz_Joseph_I.), dem Mann von Sisi\\. Ich habe dir hier den Wiki\\-Artikel herausgesucht\\.",
                 markdown = True,
             ),
-              TextMessage("Ich habe auch eine Objekt von Franz Josef I. in der Sammlung. Soll ich es dir zeigen?"
-              ),
+            TextMessage("Ich habe auch eine Objekt von Franz Josef I. in der Sammlung. Soll ich es dir zeigen?"),
         ],
         choices=["/sisi/ende", "/sisi/franz"]
     ),  

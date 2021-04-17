@@ -28,4 +28,5 @@ class PhotoMessage(Message):
         update.message.reply_photo(
             photo = self.photo,
             caption=self.caption,
+            reply_markup=reply_markup,
         )

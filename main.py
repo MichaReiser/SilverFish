@@ -30,7 +30,7 @@ def send_welcome_message(update: Update, context: CallbackContext) -> int:
 def enter_option(option: Option, update: Update, context: CallbackContext) -> int:
     context.user_data['option'] = option.uri
 
-    option.reply(update, context, get_option, inline=True)
+    option.reply(update, context, get_option)
 
     return HANDLE_RESPONSE
 

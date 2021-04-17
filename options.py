@@ -57,7 +57,7 @@ OPTIONS = [
                 caption="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/15030.jpg",
             ),
-       
+      	], 
         choices=["/gesundheit", "/sisi/ende"]
     ),
     ChoiceOption(

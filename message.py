@@ -34,6 +34,7 @@ class PhotoMessage(Message):
         self.caption = caption
     
     def send(self, update: Update, reply_markup: ReplyMarkup = None) -> None:
+        update.message.reply_chat_action('upload_photo')
         update.message.reply_photo(
             photo = self.photo,
             caption=self.caption,

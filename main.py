@@ -9,6 +9,7 @@ from constants import HUH_FILE_ID, OHOH_FILE_ID
 import os
 from dotenv import load_dotenv
 import logging
+import random
 
 load_dotenv()
 logging.basicConfig(level=logging.DEBUG,
@@ -20,18 +21,19 @@ TOKEN = os.getenv('ACCESS_TOKEN')
 HANDLE_RESPONSE = range(1)
 
 def send_welcome_message(update: Update, context: CallbackContext) -> int:
-    update.message.reply_chat_action(action="typing")
     update.message.reply_animation(
         animation="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/sliverfish.gif?token=AAJF5KPFYHW4VZY22CAF3NTAPIIZ6",
         caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung.".format(user=user_name(update.message.from_user)),
     )
+
     return enter_option(OPTIONS[0], update, context)
 
 def enter_option(option: Option, update: Update, context: CallbackContext) -> int:
     context.user_data['option'] = option.uri
 
-    option.reply(update, context, get_option)
-
+    update.message.reply_chat_action(action="typing")
+    context.job_queue.run_once(lambda _c: option.reply(update, context, get_option), random.randrange(1, 4))
+    
     return HANDLE_RESPONSE
 
 def handle_topic_selection_inline(update: Update, context: CallbackContext) -> int:

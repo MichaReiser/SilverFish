@@ -1,3 +1,5 @@
+import random
+
 from typing import List
 from telegram import Update, ReplyMarkup, MessageEntity
 
@@ -6,6 +8,10 @@ class Message:
         raise NotImplementedError("Please implement in your subclass")
 
 class TextMessage(Message):
+    """
+    Sends a text message. You can use Markdown in the text if you set markdown to True.
+    But make sure to escape all ASCII characters with codes in [1, 127] (e.g. .-_) with a backlsash
+    """
     def __init__(self, text: str, markdown: bool = False):
         super().__init__()
         self.text = text
@@ -19,7 +25,10 @@ class TextMessage(Message):
         )
 
 class PhotoMessage(Message):
-    def __init__(self, photo_url, caption):
+    """
+    Sends a message with a photo and caption
+    """
+    def __init__(self, photo_url: str, caption: str):
         super().__init__()
         self.photo = photo_url
         self.caption = caption
@@ -30,3 +39,15 @@ class PhotoMessage(Message):
             caption=self.caption,
             reply_markup=reply_markup,
         )
+
+class RandomMessage(Message):
+    """
+    Sends a random message from the given list of messages
+    """
+    def __init__(self, messages: List[Message]):
+        super().__init__()
+        self.messages = messages
+
+    def send(self, update: Update, reply_markup: ReplyMarkup = None) -> None:
+        message= random.choice(self.messages)
+        message.send(update, reply_markup)

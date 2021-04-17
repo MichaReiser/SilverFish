@@ -1,6 +1,6 @@
 from typing import Optional
 from option import Option, ChoiceOption
-from message import TextMessage, PhotoMessage
+from message import TextMessage, PhotoMessage, RandomMessage
 
 from telegram import MessageEntity
 
@@ -53,12 +53,27 @@ OPTIONS = [
         uri="/sisi/schuhe", 
         label="Schuhe", 
         message="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
-        choices=["/gesundheit", "sisi/ende"]
+        choices=["/gesundheit", "/sisi/ende"]
     ),
     ChoiceOption(
         uri="/gesundheit", 
         label="Ja, unbedingt!", 
-        message="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
+        messages=[
+            RandomMessage([
+                PhotoMessage(
+                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
+                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg",
+                ),
+                PhotoMessage(
+                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
+                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg",
+                ),
+                PhotoMessage(
+                    caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: [Objekt]",
+                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/51977.jpg",
+                ),
+            ]),
+        ],
         choices=["/",]
     ),
    ChoiceOption(

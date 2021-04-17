@@ -102,8 +102,13 @@ OPTIONS = [
     ChoiceOption(
         uri="/sisi/franz", 
         label="Ja!", 
-        message="Schau, das ist der Badeumhang von Kaiser Franz Joseph I. von Österreich mit einer Echtheitsbestätigung von Eugen Ketterl, dem letzten Kammerdiener seiner Majestät, von vor 1916",
-        choices=["/sisi/ende"]
+        messages=[
+            PhotoMessage(
+                caption="Schau, das ist der Badeumhang von Kaiser Franz Joseph I. von Österreich mit einer Echtheitsbestätigung von Eugen Ketterl, dem letzten Kammerdiener seiner Majestät, von vor 1916.",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/13091.jpg",
+            ),
+       
+        choices=["/"]
     ),
           
     

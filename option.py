@@ -5,13 +5,15 @@ from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKe
 from telegram.ext import CallbackContext
 
 from constants import HUH_FILE_ID, OHOH_FILE_ID
+from message import Message, TextMessage
 
 OptionResolver = Callable[[str], Optional['Option']]
 
 class Option:
-    def __init__(self, uri: str, label: str):
+    def __init__(self, uri: str, label: str, message: Message = None, messages: List[Message] = None):
         self.uri = uri
         self.label = label
+        self.messages = messages or ([TextMessage(message)] if message else [])
     
     def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> None:
         raise NotImplementedError("Please implement reply")
@@ -21,9 +23,8 @@ class Option:
 
 
 class ChoiceOption(Option):
-    def __init__(self, uri: str, label: str, message: str, choices: List[str]):
-        super().__init__(uri, label)
-        self.message = message
+    def __init__(self, uri: str, label: str, choices: List[str], message: Message = None, messages: List[Message] = None):
+        super().__init__(uri, label, message, messages)
         self.choices = choices
 
     def reply_with_buttoned_question(self, update: Update, context: CallbackContext, question: str, options: List[str]) -> int:
@@ -36,10 +37,9 @@ class ChoiceOption(Option):
 
     def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver, inline: bool):
         labels = [get_option(choice).label for choice in self.choices]
-        print(labels)
-        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data=label) for label in labels]])
-
+        
         if inline:
+            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data=label) for label in labels]])
             if update.callback_query is not None:
                 query = update.callback_query
                 query.edit_message_text(self.message, reply_markup=reply_markup)
@@ -47,11 +47,12 @@ class ChoiceOption(Option):
                 self.reply_with_buttoned_question(update, context, self.message, labels)
         else:
             reply_markup = ReplyKeyboardMarkup([[label] for label in labels])
+            *others, end = self.messages
 
-            update.message.reply_text(
-                text=self.message,
-                reply_markup=reply_markup
-            )
+            for other in others:
+                other.send(update)
+
+            end.send(update, reply_markup)
 
     def handle_response(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> Optional[Option]:
         topic = update.callback_query.data if update.callback_query is not None else update.message.text

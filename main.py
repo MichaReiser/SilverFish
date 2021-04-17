@@ -34,16 +34,12 @@ def enter_option(option: Option, update: Update, context: CallbackContext) -> in
 
     return HANDLE_RESPONSE
 
-def handle_topic_selection2(update: Update, context: CallbackContext) -> int:
+def handle_topic_selection_inline(update: Update, context: CallbackContext) -> int:
     query = update.callback_query
     query.answer()
-    #query.edit_message_text("Du hast {choice} gewählt.".format(choice=query.data))
     option = get_option(context.user_data['option'])
     next_option = option.handle_response(update, context, get_option)
     enter_option(next_option, update, context)
-    #next_option = get_option(context.user_data['option'])
-    #next_option.reply(update, context, get_option)
-    #context.user_data['option'] = next_option.uri
     return HANDLE_RESPONSE
 
 def handle_topic_selection(update: Update, context: CallbackContext) -> int:
@@ -82,7 +78,7 @@ def main():
         states = {
             HANDLE_RESPONSE: [
 	 	CommandHandler('start', send_welcome_message),
-		CallbackQueryHandler(handle_topic_selection2),
+		CallbackQueryHandler(handle_topic_selection_inline),
 		MessageHandler(Filters.text, handle_topic_selection)]
         },
         fallbacks=[ MessageHandler(Filters.all, handle_unknown_message)]

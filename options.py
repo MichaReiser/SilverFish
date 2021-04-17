@@ -1,16 +1,26 @@
 from typing import Optional
 from option import Option, ChoiceOption
+from message import TextMessage
 
 OPTIONS = [
     ChoiceOption(
         uri="/", 
         label="DON't offer this as an option or you'll be fired", 
         message="Was interessiert dich",
+        choices=["/sisi", "/drinkinghabits", "/skkg"]
+    ),
+    ChoiceOption(
+        uri="/skkg", 
+        label="Erzähl mir doch etwas über die Sammlung.", 
+        messages=[
+            TextMessage("Alle die Objekte hat Bruno Stefanini über fünfzig Jahre hinweg gesammelt. Er interessierte sich für nahezu alles. Die Objekte sind bei mir hier im Depot eingelagert und werden für Ausstellungen an Museen verliehen. Manchamal müssen dann die Mitarbeiter und Mitarbeiterinnen im grossen Depot ein bisschen nach den Objekten suchen, aber bisher haben sie noch immer alles gefunden. Dabei hilft ihnen die Museumsdatenbank. Von dort habe übrigens auch ich meine Infos, die ich dir hier erzähle. All das kann sich doch niemand merken!"),
+            TextMessage("Worüber soll ich dir nun etwas erzählen?"),
+        ],
         choices=["/sisi", "/drinkinghabits"]
     ),
     ChoiceOption(
         uri="/sisi", 
-        label="Sisi", 
+        label="Sisi (Kaiserin Elisabeth von Österreich)", 
         message="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
         choices=["/sisi/piano", "/sisi/schuhe"]
     ),

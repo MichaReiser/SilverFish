@@ -17,7 +17,7 @@ OPTIONS = [
         label="Erzähl mir mehr von dir.",
         messages=[
             TextMessage(
-                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen), wohne hier im Depot und kümmere mich um den Erhalt der Sammlung.\\.",
+                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen), wohne hier im Depot und kümmere mich um den Erhalt der Sammlung\\.",
                 markdown = True,
             ),
         ],

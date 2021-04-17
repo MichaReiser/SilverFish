@@ -14,10 +14,10 @@ OPTIONS = [
     ),
     LeafOption(
         uri="/silverfish",
-        label="Wer bist dann du?",
+        label="Erzähl mir mehr von dir.",
         messages=[
             TextMessage(
-                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen) und wohne hier im Depot\\.",
+                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen), wohne hier im Depot und kümmere mich um den Erhalt der Sammlung.\\.",
                 markdown = True,
             ),
         ],
@@ -25,11 +25,11 @@ OPTIONS = [
     ),
     ChoiceOption(
         uri="/restart",
-        label="Was hälst du von?",
+        label="Soll ich dir etwas anderes erzählen?",
         messages=[
             RandomMessage([
-                TextMessage("Wie wäre es mit?"),
-                TextMessage("Was hältst du von?")
+                TextMessage("Soll ich dir etwas anderes erzählen?"),
+                TextMessage("Interessiert dich eines dieser Themen?")
             ])
         ],
         # TODO create new choice option that randomly picks a sublist if there are too man (and offers an option to show other options as well)

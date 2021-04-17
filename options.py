@@ -65,7 +65,14 @@ OPTIONS = [
     ChoiceOption(
         uri="/sisi/wiki", 
         label="Ja!", 
-        message="WIKIPEDIA ARTIKEL Ich habe auch Objekte von Franz Josef I, dem Mann von Sisi. Soll ich sie dir zeigen?",
+        messages=[
+        TextMessage(
+                "Kennst [Kaiser Franz Josef I.](https://de.wikipedia.org/wiki/Franz_Joseph_I.), dem Mann von Sisi\\. Ich habe dir hier den Wiki-Artikel herausgesucht\\. ",
+                markdown = True,
+            ),
+              TextMessage("Ich habe auch eine Objekt von Franz Josef I. in der Sammlung. Soll ich es dir zeigen?"
+              ),
+        ]
         choices=["/sisi/ende", "/sisi/franz"]
     ),  
     ChoiceOption(

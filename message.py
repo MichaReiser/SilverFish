@@ -1,7 +1,7 @@
 import random
 
 from typing import List
-from telegram import Update, ReplyMarkup, MessageEntity
+from telegram import Update, ReplyMarkup, MessageEntity, InputMediaPhoto
 
 class Message:
     def send(self, update: Update, reply_markup: ReplyMarkup = None):
@@ -28,7 +28,7 @@ class PhotoMessage(Message):
     """
     Sends a message with a photo and caption
     """
-    def __init__(self, photo_url: str, caption: str):
+    def __init__(self, photo_url: str, caption: str = None):
         super().__init__()
         self.photo = photo_url
         self.caption = caption
@@ -39,6 +39,27 @@ class PhotoMessage(Message):
             photo = self.photo,
             caption=self.caption,
             reply_markup=reply_markup,
+        )
+
+class MedieGroupMessage(Message):
+    """
+    Sends multiple photos in a single message
+    """
+    def __init__(self, photo_urls: List[str], caption: str):
+        super().__init__()
+
+        if len(photo_urls) < 2:
+            raise Exception("You must specify at least two items")
+
+        self.photo_urls = photo_urls
+        self.caption = caption
+
+    def send(self, update: Update, reply_markup: ReplyMarkup = None) -> None:
+        update.message.reply_chat_action('upload_photo')
+        update.message.reply_media_group(
+            media=[
+                InputMediaPhoto(media=photo_url, caption="Test") for photo_url in self.photo_urls
+            ],
         )
 
 class RandomMessage(Message):

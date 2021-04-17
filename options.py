@@ -1,6 +1,6 @@
 from typing import Optional
 from option import Option, ChoiceOption
-from message import TextMessage, PhotoMessage, RandomMessage
+from message import TextMessage, PhotoMessage, RandomMessage, MedieGroupMessage
 
 from telegram import MessageEntity
 
@@ -16,8 +16,7 @@ OPTIONS = [
         uri="/skkg", 
         label="Erzähl mir doch etwas über die Sammlung.", 
         messages=[
-           PhotoMessage(
-            photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/bst.jpg",),
+            PhotoMessage(photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/bst.jpg"),
             TextMessage("Alle die Objekte hat Bruno Stefanini über fünfzig Jahre hinweg gesammelt. Er interessierte sich für nahezu alles. Die Objekte sind bei mir hier im Depot eingelagert und werden für Ausstellungen an Museen verliehen. Manchamal müssen dann die Mitarbeiter und Mitarbeiterinnen im grossen Depot ein bisschen nach den Objekten suchen, aber bisher haben sie noch immer alles gefunden. Dabei hilft ihnen die Museumsdatenbank. Von dort habe übrigens auch ich meine Infos, die ich dir hier erzähle. All das kann sich doch niemand merken!"),
             TextMessage("Worüber soll ich dir nun etwas erzählen?"),
         ],
@@ -55,11 +54,16 @@ OPTIONS = [
         uri="/sisi/schuhe", 
         label="Schuhe",
         messages=[
-            PhotoMessage(
-                caption="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
-                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg",
+            MedieGroupMessage(
+                photo_urls=[
+                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/37618.jpg",
+                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg",
+                    "https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23932.jpg",
+                ],
+                caption="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870.",
             ),
-      	], 
+            TextMessage("Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.")
+        ],
         choices=["/gesundheit", "/sisi/ende"]
     ),
     ChoiceOption(

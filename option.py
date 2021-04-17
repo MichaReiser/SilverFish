@@ -47,25 +47,27 @@ class ChoiceOption(Option):
             else:
                 self.reply_with_buttoned_question(update, context, self.message, labels)
         else:
-            reply_markup = ReplyKeyboardMarkup([[label] for label in labels])
             *others, end = self.messages
 
             for other in others:
                 other.send(update)
 
-            end.send(update, reply_markup)
+            end.send(update, reply_markup=self._get_reply_markup(get_option))
 
     def handle_response(self, update: Update, context: CallbackContext, get_option: OptionResolver) -> Optional[Option]:
         topic = update.callback_query.data if update.callback_query is not None else update.message.text
-        print(topic)
         choice_options = [get_option(choice) for choice in self.choices]
         selected = next((option for option in choice_options if option.label == topic), None)
 
         if not selected:    
             update.message.reply_animation(
                 animation=HUH_FILE_ID,
+                reply_markup=self._get_reply_markup(get_option)
             )
             return None
 
         return selected
 
+    def _get_reply_markup(self, get_option: OptionResolver):
+        labels = [get_option(choice).label for choice in self.choices]
+        return ReplyKeyboardMarkup([[label] for label in labels], one_time_keyboard=True)

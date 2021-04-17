@@ -1,6 +1,6 @@
 from typing import Optional
 from option import Option, ChoiceOption
-from message import TextMessage
+from message import TextMessage, PhotoMessage
 
 from telegram import MessageEntity
 
@@ -26,7 +26,7 @@ OPTIONS = [
         label="Sisi (Kaiserin Elisabeth von Österreich)", 
         messages=[
             TextMessage(
-                "Du interessierst dich für die [Kaiserin Elisabeth von Österreich](https://de.wikipedia.org/wiki/Elisabeth_von_%C3%96sterreich-Ungarn)\\. Ich habe ganz viele Objekte von ihr hier\\. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
+                "Du interessierst dichs für die [Kaiserin Elisabeth von Österreich](https://de.wikipedia.org/wiki/Elisabeth_von_%C3%96sterreich-Ungarn)\\. Ich habe ganz viele Objekte von ihr hier\\. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
                 markdown = True,
             ),
         ],
@@ -41,7 +41,12 @@ OPTIONS = [
       ChoiceOption(
         uri="/sisi/piano", 
         label="Klavier", 
-        message="Schau, das Klavier aus dem Musikzimmer von der als Sisi bekannten Kaiserin Elisabeth von Österreich.  Soll ich dir mehr über Sisi erzählen?",
+        messages=[
+            PhotoMessage(
+                caption="Schau, das Klavier aus dem Musikzimmer von der als Sisi bekannten Kaiserin Elisabeth von Österreich.  Soll ich dir mehr über Sisi erzählen?",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/6157.jpg",
+            ),
+        ],
         choices=["/sisi/wiki", "/sisi/ende"]
     ),
     ChoiceOption(

@@ -9,18 +9,32 @@ OPTIONS = [
     ChoiceOption(
         uri="/", 
         label="Erzähl mir etwas anderes, bitte!", 
-        message="Was interessiert dich",
-     choices=["/sisi", "/drinkinghabits", "/skkg", "/silverfish"]
+        message="Was interessiert dich?",
+        choices=["/sisi", "/drinkinghabits", "/skkg", "/silverfish"]
     ),
       ChoiceOption(
         uri="/silverfish",
         label="Wer bist dann du?",
         messages=[
             TextMessage(
-                "Nett, dass du fragst. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen) und wohne hier im Depot\\.",
+                "Nett, dass du fragst\\. Ich bin ein [Silberfischchen](https://de.wikipedia.org/wiki/Silberfischchen) und wohne hier im Depot\\.",
                 markdown = True,
             ),
-        choices=["/"]
+        ],
+        choices=["/"],
+    ),
+    ChoiceOption(
+        uri="/restart",
+        label="Was hälst du von?",
+        messages=[
+            RandomMessage([
+                TextMessage("Wie wäre es mit?"),
+                TextMessage("Was hältst du von?")
+            ])
+        ],
+        # TODO create new choice option that randomly picks a sublist if there are too man (and offers an option to show other options as well)
+        choices=["/sisi", "/drinkinghabits", "/skkg", "/silverfish"],
+    ),
     ChoiceOption(
         uri="/skkg", 
         label="Erzähl mir doch etwas über die Sammlung.", 
@@ -46,7 +60,7 @@ OPTIONS = [
         uri="/drinkinghabits",
         label="Trinkgewohnheiten",
         message="Kaffee oder Alkohol?",
-        choices=["/"]
+        choices=["/restart"]
     ),
       ChoiceOption(
         uri="/sisi/piano", 
@@ -94,13 +108,13 @@ OPTIONS = [
                 ),
             ]),
         ],
-        choices=["/",]
+        choices=["/restart",]
     ),
    ChoiceOption(
         uri="/sisi/ende", 
         label="Nein!", 
         message="Ok. Tschööö!",
-        choices=["/"]
+        choices=["/restart"]
     ),
     ChoiceOption(
         uri="/sisi/wiki", 
@@ -123,7 +137,7 @@ OPTIONS = [
                 photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/25212.jpg",
             ),
         ],
-        choices=["/"]
+        choices=["/restart"]
     ),
           
     

@@ -77,7 +77,7 @@ OPTIONS = [
             ),
               TextMessage("Ich habe auch eine Objekt von Franz Josef I. in der Sammlung. Soll ich es dir zeigen?"
               ),
-        ]
+        ],
         choices=["/sisi/ende", "/sisi/franz"]
     ),  
     ChoiceOption(

@@ -109,7 +109,10 @@ OPTIONS = [
     ChoiceOption(
         uri="/kaffee",
         label="Kaffee",
-        message="Coffee and Cigaretts!",
+    messages=[
+            PhotoMessage(photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/fish_coffee_cigarett.gif "),
+            TextMessage("Coffee and Cigaretts!"),
+             ],
         choices=["/kaffee/cigaretts", "/kaffee/only"]
     ),
 

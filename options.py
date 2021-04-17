@@ -8,7 +8,7 @@ from telegram import MessageEntity
 OPTIONS = [
     ChoiceOption(
         uri="/", 
-        label="DON't offer this as an option or you'll be fired", 
+        label="Erzähl mir etwas anderes, bitte!", 
         message="Was interessiert dich",
         choices=["/sisi", "/drinkinghabits", "/skkg"]
     ),
@@ -51,8 +51,13 @@ OPTIONS = [
     ),
     ChoiceOption(
         uri="/sisi/schuhe", 
-        label="Schuhe", 
-        message="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
+        label="Schuhe",
+        messages=[
+            PhotoMessage(
+                caption="Sisi war sehr gesundheitsbewusst und hat viel Sport getrieben, hier sind ihre Sportschuhe von 1865-1870. Wenn dich Gesundheit und Schönheit interessieren, zeige ich dir gerne weitere Objekte zum Thema.",
+                photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/15030.jpg",
+            ),
+       
         choices=["/gesundheit", "/sisi/ende"]
     ),
     ChoiceOption(

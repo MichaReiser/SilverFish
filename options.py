@@ -176,6 +176,7 @@ OPTIONS = [
    LeafOption(
         uri="/alkohol/switch", 
         label="Nein, ich möchte lieber was Trinken…!",
+	message="Ok, moment. Ich bin gleich soweit.",
 	next_option="/drinkinghabits",
 	    ),
     LeafOption(

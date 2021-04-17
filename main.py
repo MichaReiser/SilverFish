@@ -21,6 +21,7 @@ TOKEN = os.getenv('ACCESS_TOKEN')
 HANDLE_RESPONSE = range(1)
 
 def send_welcome_message(update: Update, context: CallbackContext) -> int:
+    update.message.reply_chat_action("upload_photo")
     update.message.reply_animation(
         animation="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/sliverfish.gif?token=AAJF5KPFYHW4VZY22CAF3NTAPIIZ6",
         caption="Oh, hallihallo {user}. Ich bin der Silberfisch vom Wintower. Ich lebe hier zwischen den Kisten, Büchern und allerlei alten Objekten. Gerne erzähle ich dir etwas über die Sammlung.".format(user=user_name(update.message.from_user)),
@@ -32,7 +33,7 @@ def enter_option(option: Option, update: Update, context: CallbackContext) -> in
     context.user_data['option'] = option.uri
 
     update.message.reply_chat_action(action="typing")
-    context.job_queue.run_once(lambda _c: option.reply(update, context, get_option), random.randrange(1, 4))
+    context.job_queue.run_once(lambda _c: option.reply(update, context, get_option), random.randrange(1, 3))
     
     return HANDLE_RESPONSE
 

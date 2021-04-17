@@ -204,7 +204,7 @@ OPTIONS = [
                 ),
                 PhotoMessage(
                     caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: Schminktisch; mit Beleuchtung; Sarah Bernhardt",
-                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects./6471jpg",
+                    photo_url="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/6471.jpg",
                 ),
                 PhotoMessage(
                     caption="Was die Schönen und Mächtigen der Welt so brauchten, um sich frisch zu machen: Toilettengarnitur von Adolf Hitler von um 1935",

@@ -25,7 +25,7 @@ class Option:
 class ChoiceOption(Option):
     def __init__(self, uri: str, label: str, choices: List[str], message: Message = None, messages: List[Message] = None):
         super().__init__(uri, label, message, messages)
-        self.choices = choices
+        self.choices = choices  
 
     def reply(self, update: Update, context: CallbackContext, get_option: OptionResolver):
         labels = [get_option(choice).label for choice in self.choices]

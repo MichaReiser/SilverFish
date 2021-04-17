@@ -2,6 +2,9 @@ from typing import Optional
 from option import Option, ChoiceOption
 from message import TextMessage
 
+from telegram import MessageEntity
+
+
 OPTIONS = [
     ChoiceOption(
         uri="/", 
@@ -21,7 +24,12 @@ OPTIONS = [
     ChoiceOption(
         uri="/sisi", 
         label="Sisi (Kaiserin Elisabeth von Österreich)", 
-        message="Du interessierst dich für die Kaiserin Elisabeth von Österreich. Ich habe ganz viele Objekte von ihr hier. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
+        messages=[
+            TextMessage(
+                "Du interessierst dich für die [Kaiserin Elisabeth von Österreich](https://de.wikipedia.org/wiki/Elisabeth_von_%C3%96sterreich-Ungarn)\\. Ich habe ganz viele Objekte von ihr hier\\. Soll ich dir etwas über ihre Schuhe oder über ihr Klavier erzählen?",
+                markdown = True,
+            ),
+        ],
         choices=["/sisi/piano", "/sisi/schuhe"]
     ),
     ChoiceOption(

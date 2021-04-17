@@ -56,11 +56,56 @@ OPTIONS = [
         ],
         choices=["/sisi/piano", "/sisi/schuhe"]
     ),
-    LeafOption(
+     ChoiceOption(
         uri="/drinkinghabits",
-        label="Trinkgewohnheiten",
-        message="Kaffee oder Alkohol?",
-        next_option="/restart",
+        label="Historische Trinkgewohnheiten",
+        message="Für welches Getränk interessierst du dich? Kaffee oder Alkohol?",
+        choices=["/kaffee","/"]
+    ),
+
+ ChoiceOption(
+        uri="/kaffee",
+        label="Kaffee",
+        message="Coffee and Cigaretts!",
+        choices=["/kaffee/cigaretts", "/kaffee/only"]
+    ),
+
+ ChoiceOption(
+        uri="/kaffee/cigaretts",
+        label="Erzähl mir mehr...",
+	messages=[
+            TextMessage("Hier eine Zusammenstellung  von Objekten zum Thema Coffee and Cigaretts:"),
+            MedieGroupMessage(
+                media=[
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/11595.jpg", caption="24 Kaffeelöffel aus dem Service von König Karl I. von Portugal"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23072.jpg", caption="Milchkanne aus dem Service der Luzerner Hotelière Katharina Morel-Peyer von ca. 1810"),
+                    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/23118.jpg", caption="Mokkaservice mit goldenen Bienen aus dem Besitz von Napoleon Bonaparte von ca. 1810"),
+		    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/46060.jpg", caption="Zigarettenetui, welches die Schauspielerin Katharina Schratt 1911 von ihrem Verehrer Erzherzog Franz Salvator zu Wihnachten geschenkt bekam"),
+		    InputMediaPhoto(media="https://raw.githubusercontent.com/MichaReiser/SilverFish/main/images/objects/51650.jpg", caption="Zigarettenetui von Prinz Friedlich Leopold von Preussen, wohl um die letzte Jahrhundertwende"),
+                ],
+            ),
+            TextMessage("…noch ein Filmtipp gefällig?")
+        ],
+       
+        choices=["/kaffee/cigaretts/film", "/"]
+    ),
+
+ChoiceOption(
+        uri="/kaffee/cigaretts/film",
+        label="Ja, gerne!",
+        messages=[
+            TextMessage(
+                "Der Film [Coffee and Cigarettes](https://www.youtube.com/watch?v=mM6Mpn0-eyQ), von Jim Jarmusch ist einer meiner Lieblingsfilme\\.",
+                markdown = True,
+            ),
+        choices=["/"]
+    ),
+
+ChoiceOption(
+        uri="/kaffee/only",
+        label="Nur Kaffee, bitte.",
+        message="Voilà, Inspirationen für den königlichen Nachmittagskaffee: 8855; 11750.1; 11791",
+        choices=["/"]
     ),
       ChoiceOption(
         uri="/sisi/piano", 

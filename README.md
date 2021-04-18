@@ -4,7 +4,9 @@
 
 Chatbot that guides you through the collection of historical objects
 
-![grafik](https://user-images.githubusercontent.com/29306940/115046387-aea2e380-9ed7-11eb-9303-02c803bff5b5.png)
+![Silverfish_hi_small](https://user-images.githubusercontent.com/29306940/115141450-93051d80-a03c-11eb-95cd-93157805758f.jpg)
+
+
 
 The bot is running on telegram
 

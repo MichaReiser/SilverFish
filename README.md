@@ -7,7 +7,7 @@ Chatbot that guides you through the collection of historical objects
 
 The bot is running on telegram
 
-built @ [GlamHack21](https://hack.glam.opendata.ch/)
+built @ [GlamHack21](https://hack.glam.opendata.ch/project/69)
 
 ## Setup
 
